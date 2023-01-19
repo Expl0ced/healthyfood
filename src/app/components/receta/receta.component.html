@@ -1,0 +1,98 @@
+<div class="background">
+    <div class="container text-center">
+        <div class="row row1">
+            <h1 class="fuente titulo">{{recetas.Encabezado}}</h1>
+        </div>
+        <div class="row align-items-start">
+            <div class="col">
+                <div class="row align-items-start mb-3" *ngIf="recetas.Ingredientes">
+                    <p class="fuente">Ingredientes</p>
+                    <ul *ngIf="recetas.Ingredientes">
+                        <!-- <li>{{recetas.Ingredientes}}</li>    -->
+                        <li *ngFor="let inge of ingredientes" class="texto">{{inge}}</li>
+                    </ul>
+
+                </div>
+                <div class="row align-items-start mb-3" *ngIf="recetas.Preparacion">
+                    <p class="fuente">Preparacion</p>
+                    <ol>
+                        <li *ngFor="let prep of preparacion" class="texto">{{prep}}</li>
+                    </ol>
+                    <p></p>
+                </div>
+                <div class="row align-items-start mb-3" *ngIf="recetas.Notas">
+                    <p class="fuente">Notas</p>
+                    <p class="texto">{{notas}}</p>
+                </div>
+                <div class="row align-items-start mb-3">
+                    <p *ngIf="recetas.Detalles" class="fuente">
+                        Detalles</p>
+                    <ul>
+                        <li *ngFor="let det of detalles" class="texto">
+                            {{det}}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <img src="{{ recetas.Imagen }}" class="imagen_receta" alt="" width="250">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <img *ngIf="recetas.Etiqueta" src="{{ recetas.Etiqueta }}" alt="" width="250px" height="">
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button mat-fab shareButton="twitter" class="btn twitter social-media" #twtBtn="shareButton"
+                        [style.color]="twtBtn?.color">
+                        <i class="fa-brands fa-square-twitter "></i> Twitter
+                    </button>
+                    <button mat-fab shareButton="facebook" class="btn facebook social-media" #fbBtn="shareButton"
+                        [style.backgroundColor]="fbBtn?.color" style="color:white;">
+                        <i class="fa-brands fa-square-facebook "></i> Facebook
+                    </button>
+                    <button mat-fab shareButton="whatsapp" class="btn whatsapp social-media" #WaBtn="shareButton"
+                        [style.backgroundColor]="WaBtn?.color" style="color:white;">
+                        <i class="fa-brands fa-whatsapp "></i> Whatsapp
+                    </button>
+                    <button mat-fab shareButton="reddit" class="btn reddit social-media" #RdBtn="shareButton"
+                        [style.color]="RdBtn?.color" style="color:white;">
+                        <i class="fa-brands fa-reddit " style="color:rgb(255, 69, 0)"></i> Reddit
+                    </button>
+                    <button mat-fab shareButton="telegram" class="btn linkedin social-media" #tlBtn="shareButton"
+                        [style.backgroundColor]="tlBtn?.color" style="color:white;">
+                        <i class="fa-brands fa-telegram"></i> Telegram
+                    </button>
+                    <button mat-fab shareButton="email" class="btn copy-link social-media" #emBtn="shareButton"
+                        [style.backgroundColor]="emBtn?.color" style="color:white;">
+                        <i class="fa-solid fa-envelope"></i> Email
+                    </button>
+                    <button mat-fab shareButton="line" class="btn line social-media" #lnBtn="shareButton"
+                        [style.color]="lnBtn?.color" style="color:white;">
+                        <i class="fa-brands fa-line" style="color:rgb(6, 199, 85)"></i> Line
+                    </button>
+                    <button mat-fab shareButton="copy" class="btn copy-link social-media" #cpBtn="shareButton"
+                        [style.backgroundColor]="cpBtn?.color" style="color:white;" (click)="showSuccess()">
+                        <i class="fa-solid fa-link "></i> Copy Link
+                    </button>
+                    <button mat-fab shareButton="print" class="btn print social-media" #ptBtn="shareButton"
+                        [style.backgroundColor]="ptBtn?.color" style="color:white;">
+                        <i class="fa-solid fa-print"></i> Print
+                    </button>
+                    <!-- <button class="btn" style="background-color: #765AA2;"><share-buttons [include]="['print']" [show]="1" [showText]="true"
+                        [url]="'https://twitter.com/'"></share-buttons></button> -->
+
+
+
+                </div>
+            </div>
+        </div>
+        <p></p>
+    </div>
+</div>

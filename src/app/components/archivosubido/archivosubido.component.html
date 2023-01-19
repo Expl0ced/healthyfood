@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <ul class="navbar-nav">
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="orden">Clientes Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="listado_pacientes">Clientes no Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='usuario' || rol=='admin'">
+                    <li class="nav-item"><a class="nav-link" href="perfil">Perfil</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="cuadro">Cambiar Datos</a></li>
+                </button>
+                <button *ngIf="rol=='nutricionista' || rol=='admin'" type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="upreceta">Subir Receta</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="archivoUP">Cambiar Foto</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="archivos_asignados">Archivos Asignados</a></li>
+                </button>
+            </ul>
+        </div>
+        <div class="col">
+            <div style="text-align: center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <div *ngFor="let element of files">
+                                    <a href="{{element.imagen}}" class="btn btn-primary mt-5" target="_blank" download="Minuta {{nombre}} {{apellido}}.csv">Descargar Archivo de fecha {{element.fecha_creacion}}</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

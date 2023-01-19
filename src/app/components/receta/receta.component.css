@@ -1,0 +1,81 @@
+.copybtn {
+    color: #607D8B;
+}
+
+.twitter {
+    border: 1px solid #01a5e6
+}
+
+.reddit {
+    border: 1px solid rgb(255, 69, 0)
+}
+
+.social-media {
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+}
+.social-media:hover{
+    box-shadow: 2px 2px 5px #999;
+}
+.line {
+    border: 1px solid rgb(6, 199, 85);
+}
+.foto{
+    -webkit-box-shadow: 2px 2px 5px #999;
+    -moz-box-shadow: 2px 2px 5px #999;
+    filter: shadow(color=#999999, direction=135, strength=2);
+}
+
+.fuente{
+    font-family: fantasy;
+    font-size: x-large;
+    font-style: italic;
+    margin-bottom: 2em;
+    text-align: center;
+}
+.imagen_receta{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: aliceblue;
+    margin-bottom: 10rem;
+}
+.texto{
+    text-align: left;
+    font-family: Montserrat, italic;
+    margin-bottom: 2rem;
+    line-height : 1,5;
+    font-weight: bold;
+}
+.background{
+    padding: 0px 10px 0px 10px;
+}
+.titulo{
+    margin-top: 1%;
+}
+.lines-effect{
+    display: inline-block;
+    position:relative;
+
+
+}
+
+.lines-effect::after,.lines-effect::before{
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 3px;
+    background-color: black;
+    top: 0.8rem;
+}
+.lines-effect::before{  
+    left: 23.125rem;
+}
+.lines-effect::after{
+    right: 23.125rem;
+}

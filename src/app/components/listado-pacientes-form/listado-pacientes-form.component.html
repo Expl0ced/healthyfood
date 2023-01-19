@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="col"></div>
+    <div class="col">
+        <form>
+            <div class="mb-3 row">  
+                <label class="col-sm-2 col-form-label">Nombre Nutricionista</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{nombre}}">
+                </div>
+                <label class="col-sm-2 col-form-label">Apellido Nutricionista</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{apellido}}">
+                </div>
+                <label class="col-sm-2 col-form-label">Nombre Cliente</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{usuarios.Nombre}}" [(ngModel)]="orden.nombreCliente" [ngModelOptions]="{ standalone: true }">
+                </div>
+                <label class="col-sm-2 col-form-label">Apellido Cliente</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{usuarios.Apellido}}" [(ngModel)]="orden.apellidoCliente" [ngModelOptions]="{ standalone: true }">
+                </div>
+                <label class="col-sm-2 col-form-label">ID del Usuario</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{{usuarios.idUser}}" [(ngModel)]="orden.idClienteNutri" [ngModelOptions]="{ standalone: true }">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-success" (click)="InsertOrden()" type="submit">Registrar Orden</button>
+            </div>
+        </form>
+    </div>
+    <div class="col"></div>
+</div>

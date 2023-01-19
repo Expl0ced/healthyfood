@@ -1,0 +1,11 @@
+.titulo {
+    margin-bottom: 20px;
+}
+
+.file-input {
+    display: none;
+}
+
+.btn-light{
+    border: 1px solid black;
+}

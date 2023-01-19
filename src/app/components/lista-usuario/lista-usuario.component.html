@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="titulo text-center">Lista de Usuarios</h5>
+                    <table class="table table-borderless table-hover table-bordered">
+                        <tbody>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Editar</th>
+                                <th>Borrar</th>
+                            </tr>
+                            <tr *ngFor="let machucao of usuarios">
+                                <td> {{ machucao.Nombre }} </td>
+                                <td> {{ machucao.Apellido }} </td>
+                                <td>{{ machucao.Email }}</td>
+                                <td>{{ machucao.Rol }}</td>
+                                <td><i class="fa-solid fa-pen-to-square text-info"></i></td>
+                                <td><i class="fa-solid fa-trash text-danger" type="submit" (click)="borrarUsuario(machucao.idUser)"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>

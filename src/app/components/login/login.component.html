@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="card-body">
+                <h5>Bienvenido a Healthyfood</h5>
+                <form class="mt-5">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label"><i class="fa-solid fa-at"></i> Email</label>
+                        <input [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label"><i class="fa-solid fa-lock"></i> Contraseña</label>
+                        <input [(ngModel)]="user.pass" [ngModelOptions]="{standalone: true}" type="password" class="form-control" id="pass" placeholder="Contraseña" minlength="10">
+                    </div>
+                    <div class="mb-3">
+                        <a type="button" class="btn btn-primary" (click)="logIn()" href="inicio" value="Log In">Ir a recetas</a>
+                    </div>
+                </form>
+            </div>
+            
+
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+
+<!-- <router-outlet></router-outlet> -->

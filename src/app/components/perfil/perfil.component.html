@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <ul class="navbar-nav mt-5">
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="orden">Clientes Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="listado_pacientes">Clientes no Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='usuario' || rol=='admin'">
+                    <li class="nav-item"><a class="nav-link" href="perfil">Perfil</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="cuadro">Cambiar Datos</a></li>
+                </button>
+                <button *ngIf="rol=='nutricionista' || rol=='admin'" type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="upreceta">Subir Receta</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="archivoUP">Cambiar Foto</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="archivos_asignados">Archivos Asignados</a></li>
+                </button>
+            </ul>
+        </div>
+        <div class="col-6">
+            <h3 class="text-center titulo">Datos Personales</h3>
+            <div class="dropdown">
+                <button class="btn botton btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Cambiar Foto</button>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <form (ngSubmit)="onSubmit(userid)">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary">
+                                <input type="file" class="form-control-file" accept="image/*" name="image"
+                                    (change)="selectImage($event)"></button>
+                            <button type="submit" class="btn btn-outline-success">Upload</button>
+                        </div>
+                    </form>
+                </ul>
+            </div>
+            <img src="{{user.Img}}" class="img-thumbnail rounded mx-auto d-block mb-5 foto">
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-9">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="fuente">Nombre:</p>
+                                </td>
+                                <td>
+                                    <p class="fuente">{{user.Nombre}} {{user.Apellido}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="fuente">Genero:
+                                </td>
+                                <td *ngIf="user.Genero=='no_binario' || user.Genero=='otros'">
+                                    <p class="fuente">No Binario</p>
+                                </td>
+                                <td *ngIf="user.Genero!='no_binario' && user.Genero!='otros'">
+                                    <p class="fuente">{{user.Genero}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="fuente">Peso: {{user.Peso}}kg</p>
+                                </td>
+                                <td>
+                                    <p class="fuente">Altura: {{user.Altura}}CM</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="fuente">IMC: </p>
+                                </td>
+                                <td>
+                                    <p class="fuente">{{user.IMC}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="fuente">Email:</p>
+                                </td>
+                                <td>
+                                    <p class="fuente">{{user.Email}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="fuente">Sintomas:</p>
+                                </td>
+                                <td>
+                                    <p class="fuente">{{user.Sintomas}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

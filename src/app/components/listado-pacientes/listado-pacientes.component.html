@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <ul class="navbar-nav mt-5">
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="orden">Clientes Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="listado_pacientes">Clientes no Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='usuario' || rol=='admin'">
+                    <li class="nav-item"><a class="nav-link" href="perfil">Perfil</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="cuadro">Cambiar Datos</a></li>
+                </button>
+                <button *ngIf="rol=='nutricionista' || rol=='admin'" type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="upreceta">Subir Receta</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="archivoUP">Cambiar Foto</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="archivos_asignados">Archivos Asignados</a></li>
+                </button>
+            </ul>
+        </div>
+        <div *ngIf="rol=='nutricionista'" class="col-9">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Usuarios sin Asignacion</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let uwu of usuarios">
+                        <td>
+                            <div class="card mb-3" style="max-width: 540px;">
+                                <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img *ngIf="uwu.Img" src="{{uwu.Img}}" class="img-fluid rounded-start"
+                                                alt="...">
+                                            <img *ngIf="!uwu.Img && uwu.Genero=='no_binario'" src="assets/avatars/nogenre-avatar.png"
+                                                class="img-fluid rounded-start" alt="...">
+                                            <img *ngIf="!uwu.Img && uwu.Genero=='masculino'" src="assets/avatars/male-avatar.jpg"
+                                                class="img-fluid rounded-start" alt="...">
+                                                <img *ngIf="!uwu.Img && uwu.Genero=='femenino'" src="assets/avatars/female-avatar.jpg"
+                                                class="img-fluid rounded-start" alt="...">
+                                        </div>
+
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5><span class="badge bg-secondary">
+
+
+                                                        {{uwu.idUser}}</span> {{uwu.Nombre}}
+                                                    {{uwu.Apellido}}</h5>
+                                                <p class="card-text">{{uwu.Sintomas}}</p>
+                                                <p *ngIf="uwu.Sintomas==null" class="card-text">El usuario no ha
+                                                    Ingresado
+                                                    ningun sintoma al sistema</p>
+                                                <p *ngIf="uwu.Peso!=null && uwu.Altura!=null" class="card-text text-muted">Peso:
+                                                    {{uwu.Peso}}
+                                                    Altura: {{uwu.Altura}}</p>
+                                                <p *ngIf="uwu.Peso==null" class="card-text text-muted">Este Usuario no
+                                                    ha
+                                                    Ingresado peso ni altura al sistema</p>
+                                                <p *ngIf="uwu.IMC!=null" class="card-text text-muted">IMC: {{uwu.IMC}}</p>
+                                                <p *ngIf="uwu.IMC==null" class="card-text text-muted">IMC: No calculable
+                                                </p>
+                                            </div>
+                                            <button class="btn btn-primary ms-3" type="submit" id="liveToastBtn"
+                                                (click)="asignarUsuario(uwu.idUser)">Asignar
+                                                Paciente
+                                            </button>
+                                        </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

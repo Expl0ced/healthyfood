@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="recetas">healthyfood</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" *ngIf="token">
+                    <a class="nav-link active" aria-current="page" routerLink="recetas">Recetas</a>
+                </li>
+                <li class="nav-item" *ngIf="token">
+                    <a class="nav-link" routerLink="registro" *ngIf="rol=='admin'">Listado de Usuarios</a>
+                </li>
+                <li class="nav-item" *ngIf="token">
+                    <a class="nav-link" routerLink="orden">Perfil</a>
+                </li>
+                <li class="nav-item" *ngIf="!token">
+                    <a class="nav-link" routerLink="registrarse">Registro</a>
+                </li>
+                <li class="nav-item" *ngIf="!token">
+                    <a class="nav-link" routerLink="login">Login</a>
+                </li>
+            </ul>
+        </div>
+        <div class="btn btn-success" (click)="refresh()">
+            actualizar
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{datos}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <li><a class="dropdown-item" href="login" (click)="removeToken()">Desconectar</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<div>
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,19 @@
+.green-icon{
+    color: green;
+}
+
+.red-icon{
+    color: red;
+}
+
+h5{
+    text-align: center;
+}
+
+.spinner-border{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+.titulo{
+    margin-bottom: 5.rem;
+}

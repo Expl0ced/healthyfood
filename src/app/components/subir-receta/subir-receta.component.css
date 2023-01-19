@@ -1,0 +1,20 @@
+.titulo {
+    margin-bottom: 20px;
+}
+
+.file-input {
+    display: none;
+}
+
+.btn-light{
+    border: 1px solid black;
+}
+.navbar-nav{
+    margin-top:5em;
+    opacity: 0.9;
+}
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}

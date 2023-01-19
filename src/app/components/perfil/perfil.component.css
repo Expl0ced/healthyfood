@@ -1,0 +1,43 @@
+.btn-light{
+    border: 1px solid black;
+}
+.center{
+    text-align: center;
+}
+.foto{
+    width: auto;
+    height: 50em;
+    -webkit-box-shadow: 2px 2px 5px #999;
+    -moz-box-shadow: 2px 2px 5px #999;
+    filter: shadow(color=#999999, direction=135, strength=2);   
+}
+
+.botton{
+    position: static;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;    
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    float: right;
+}
+.fuente{
+    font-family: Cabin, sans-serif;
+    font-size: 20px;
+    font-variant: Cabin-italic;
+    text-shadow: 3px 3px 3px #ababab;
+}
+.titulo{
+    font-family: Cabin, sans-serif;
+    font-size: 40px;
+    margin-bottom: 3rem;
+}
+.table{
+    margin-top: 20rem;
+}
