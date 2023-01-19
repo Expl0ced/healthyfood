@@ -45,6 +45,7 @@ import { AgChartsAngularModule } from 'ag-charts-angular';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { RouterModule } from '@angular/router';
+import { ComodinComponent } from './components/comodin/comodin.component';
 
 
 const icons = [
@@ -81,6 +82,7 @@ const shareProp = {
     MinutaComponent,
     ArchivosubidoComponent,
     InicioComponent,
+    ComodinComponent,
   ],
   imports: [
     BrowserModule,

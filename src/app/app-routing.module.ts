@@ -17,6 +17,7 @@ import { MinutaComponent } from './components/minuta/minuta.component';
 import { ArchivosubidoComponent } from './components/archivosubido/archivosubido.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import * as path from 'path';
+import { ComodinComponent } from './components/comodin/comodin.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -32,7 +33,8 @@ const routes: Routes = [
   { path: 'upreceta', component: SubirRecetaComponent, canActivate: [AuthGuard], data: { expectedRole: ['nutricionista', 'admin'] } },
   { path: 'minuta/:id/:nombre/:apellido', component: MinutaComponent, canActivate: [AuthGuard], data: { expectedRole: ['nutricionista', 'admin'] } },
   { path: 'archivos_asignados', component: ArchivosubidoComponent },
-  { path: 'inicio', component: InicioComponent }
+  { path: 'inicio', component: InicioComponent },
+  { path: 'comodin/:id/:nombre/:apellido', component: ComodinComponent, canActivate: [AuthGuard], data: { expectedRole: ['nutricionista', 'admin'] } },
 ];
 
 @NgModule({

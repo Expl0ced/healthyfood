@@ -78,6 +78,7 @@ export class MinutaComponent {
   // this.primer_registro, this.segundo_registro, this.registro_actual
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.obtenerUser()
   }
 
