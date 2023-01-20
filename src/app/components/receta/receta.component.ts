@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ViewRecetaService } from 'src/app/services/view-receta.service';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
+import { SaverecipeService } from 'src/app/services/saverecipe.service';
 
 
 @Component({
@@ -19,8 +20,15 @@ export class RecetaComponent implements OnInit {
   public detalles:string[]=[]
   public notas:string[]=[]
 
+  public recipe:any={
+    id:0,
+    idReceta:0,
+    idUser:localStorage.getItem('idUser')
+  }
+
   constructor(private recetaService: ViewRecetaService,
-              private activerouter:ActivatedRoute, private tostada:ToastrService) { }
+              private activerouter:ActivatedRoute, private tostada:ToastrService,
+              private saverecipe: SaverecipeService) { }
   ngOnInit(): void {
     this.obtenerReceta()
   }
@@ -33,8 +41,12 @@ export class RecetaComponent implements OnInit {
     let arrayNOT=[]
     this.recetaService.getRecetabyID(recetaid).subscribe((resp:any)=>{
       this.recetas = resp
-      // this.key.push(this.recetas.Ingredientes)
-      // console.log(this.recetas.Ingredientes)
+      console.log(this.recetas.IdReceta)
+
+      this.recipe.idReceta=this.recetas.IdReceta
+
+      
+
       arrayING=this.recetas.Ingredientes
       let arr=arrayING.split(',')
       let err=arr.map((item:any)=>{
@@ -56,7 +68,6 @@ export class RecetaComponent implements OnInit {
       arrayDET=this.recetas.Detalles
       let comodin=arrayDET.replace("'[',",'')
       let detsplit=comodin.split(',')
-      console.log(detsplit)
       let detmap=detsplit.map((item:any)=>{
         return item.replace("'", "").replace("',",",").replace("']'",'').replace("'",'')
       })
@@ -68,6 +79,15 @@ export class RecetaComponent implements OnInit {
 
   showSuccess() {
     this.tostada.success('Con exito en el portapapeles', 'El link ha sido copiado', {positionClass:'toast-bottom-right'});
+  }
+
+  guardarReceta(){
+    console.log(this.recipe)
+    this.saverecipe.saveRecipe(this.recipe).subscribe((res:any)=>{
+      this.recipe=res
+      console.log(this.recipe)
+    })
+
   }
 
 }

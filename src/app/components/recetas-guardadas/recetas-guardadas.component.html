@@ -1,12 +1,13 @@
 <div>
     <div class="row">
+        <h1>Recetas Favoritas de {{nombre}} {{apellido}}</h1>
         <div class="col">
-            <div *ngFor="let rece of recetas" class="card" style="width: 20.75rem; height:38rem;">
+            <div *ngFor="let rece of recipe" class="card" style="width: 20.75rem; height:38rem;">
                 <i class="fa-regular fa-star-sharp"></i>
                 <img src="{{rece.Imagen}}" class="card-img-top" alt="..." width="10rem">
                 <div class="card-body">
                     <h5 class="card-title">{{rece.Encabezado}}</h5>
-                    <a href="/recetas/{{rece.IdReceta}}" class="btn btn-primary">Ir a receta</a>
+                    <a href="/recetas/{{rece.idReceta}}" class="btn btn-primary">Ir a receta</a>
                     
                 </div>
             </div>

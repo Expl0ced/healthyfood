@@ -18,6 +18,7 @@ import { ArchivosubidoComponent } from './components/archivosubido/archivosubido
 import { InicioComponent } from './components/inicio/inicio.component';
 import * as path from 'path';
 import { ComodinComponent } from './components/comodin/comodin.component';
+import { RecetasGuardadasComponent } from './components/recetas-guardadas/recetas-guardadas.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'archivos_asignados', component: ArchivosubidoComponent },
   { path: 'inicio', component: InicioComponent },
   { path: 'comodin/:id/:nombre/:apellido', component: ComodinComponent, canActivate: [AuthGuard], data: { expectedRole: ['nutricionista', 'admin'] } },
+  {path:'Favoritas', component:RecetasGuardadasComponent}
 ];
 
 @NgModule({

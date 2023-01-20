@@ -22,3 +22,8 @@ img{
     animation-name: bounce;
     animation-timing-function: ease;
 }
+h1{
+    font-family: Montserrat, italic;
+    margin-top: 5%;
+    text-align: center;
+}
