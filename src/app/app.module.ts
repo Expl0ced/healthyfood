@@ -93,8 +93,6 @@ const shareProp = {
     CommonModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({
-      maxOpened:1,
-      preventDuplicates:true
     }), // ToastrModule added
     NgxFileDropModule,
     UploaderModule,

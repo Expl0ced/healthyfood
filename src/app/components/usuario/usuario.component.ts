@@ -25,18 +25,21 @@ export class UsuarioComponent implements OnInit {
     Img: "",
     Asignado: "",
     Peso: 0,
-    Peso_Anterior:0,
-    Peso_Anterior2:0,
+    Peso_Anterior: 0,
+    Peso_Anterior2: 0,
     Altura: 0,
     IMC: 0,
-    IMC_Anterior:0,
-    IMC_Anterior2:0,
+    IMC_Anterior: 0,
+    IMC_Anterior2: 0,
+    Contex_Fisica: '',
     Genero: ''
   }
+  emailLen: number = 0
 
 
 
   registrarUsuario() {
+    this.emailLen = this.user.Email.length
     if ((this.user.Nombre == 'Aquiles' && this.user.Apellido == 'Brinco') || (this.user.Nombre == 'Aquiles' && this.user.Apellido == 'Baeza' || this.user.Apellido == 'Castro' || this.user.Apellido == 'Bailo') || (this.user.Nombre == 'Aquiles' || this.user.Nombre == 'Debora' && this.user.Apellido == 'Baeza Parada')
       || (this.user.Nombre == 'Armando ' && this.user.Apellido == 'Casas') || (this.user.Nombre == 'Débora ' && this.user.Apellido == 'Melo') || (this.user.Nombre == 'Debora ' && this.user.Apellido == 'Melo') || (this.user.Nombre == 'Dévora ' && this.user.Apellido == 'Melo')
       || (this.user.Nombre == 'Devora ' && this.user.Apellido == 'Melo') || (this.user.Nombre == 'Elsa' && this.user.Apellido == 'Polindo' || this.user.Apellido == 'Pato' || this.user.Apellido == 'Pito' || this.user.Apellido == 'Podiondo' || this.user.Apellido == 'Capunta' || this.user.Apellido == 'Pallo') ||
@@ -52,11 +55,12 @@ export class UsuarioComponent implements OnInit {
       this.tostada.warning('por el Registro Civil Chileno', 'Nombre Prohibido', { positionClass: 'toast-bottom-right' });
     }
     else {
+      let caracter: string = this.user.Email.substring(this.emailLen - 4, this.emailLen) || ''
+      let caracter2: string = this.user.Email.substring(this.emailLen - 3, this.emailLen) || ''
       for (let element of this.user.Email) {
         for (let x of element) {
-          let caracter=this.user.Email.substring(this.user.Email.length-4)
-          let caracter2=this.user.Email.substring(this.user.Email.length-3)
           if (caracter == '.com' || caracter2 == '.es' || caracter2 == '.cl') {
+            console.log(x)
             if (x == '@') {
               if (this.user.Password.length >= 10) {
                 this._userservice.createUser(this.user).subscribe(res => {
@@ -71,25 +75,22 @@ export class UsuarioComponent implements OnInit {
                 }, 500);
               }
               else {
+                console.log('estoy aqui')
                 this.tostada.warning('No tiene el largo minimo permitido', 'La contraseña', {
                   positionClass: 'toast-bottom-right'
                 })
               }
             }
-            else{
-              for(let i=0; i<1; i++){
-                this.tostada.warning('No es valido', 'El correo ingresado', { positionClass: 'toast-bottom-right'})
-              }
-            }
-          }
-          else{
-            for(let i=0; i<1; i++){
+            else {
+              
               this.tostada.warning('No es valido', 'El correo ingresado', { positionClass: 'toast-bottom-right' })
             }
-            
+          } else {
+            this.tostada.warning('No es valido', 'El correo ingresado', { positionClass: 'toast-bottom-right' })
           }
         }
       }
+
     }
     // this._userservice.createUser(this.user).subscribe(res => {
     //   console.log(res);
@@ -106,4 +107,6 @@ export class UsuarioComponent implements OnInit {
   //     this.router.navigate(['recetas']);
   //   }, 500);
   // }
+
 }
+

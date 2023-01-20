@@ -48,6 +48,7 @@ export class CuadrosComponent implements OnInit {
     IMC: 0,
     IMC_Anterior:0,
     IMC_Anterior2:0,
+    Contex_Fisica:'',
     Genero: ''
   }
   title = 'fileUpload';

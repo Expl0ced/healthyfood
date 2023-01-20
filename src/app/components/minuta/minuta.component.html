@@ -30,15 +30,45 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
+                            <div class="row" style="justify-content: center;">
+                                <img src="{{user.Img}}" alt="" class="img-dimension img-thumbnail rounded float-start">
+                            </div>
                             <div class="row">
-                                <div style="display: block;">
-                                    <canvas baseChart width="400" height="400"
+                                <div class="col">
+                                    <h6>Nombre: {{user.Nombre}} {{user.Apellido}}</h6>
+                                    <h6 *ngFor="let element of cantidad_archivos">{{element[0][0]}}</h6>
+                                    <h6>Altura: {{user.Altura}}</h6>
+                                </div>
+                                <div class="col">
+                                    <h6>Email: {{user.Email}}</h6>
+                                    <h6>Genero: {{user.Genero}}</h6>
+                                </div>
+                                <hr>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div style="display: block;">
+                                    <h4>Los pesos registrados por el Paciente</h4>
+                                    <canvas baseChart width="200" height="200"
                                         [type]="'line'"
                                         [data]="lineChartData"
                                         [options]="lineChartOptions"
                                         [legend]="lineChartLegend">
                                     </canvas>
                                 </div>
+                                </div>
+                                <div class="col">
+                                    <div style="display: block;">
+                                    <h4>Variaciones del IMC del paciente</h4>
+                                    <canvas baseChart width="200" height="200"
+                                        [type]="'line'"
+                                        [data]="lineChartDataIMC"
+                                        [options]="lineChartOptions"
+                                        [legend]="lineChartLegend">
+                                    </canvas>
+                                </div>
+                                </div>
+                                
                             </div>
                             <div class="card">
                                 <div class="card-body">

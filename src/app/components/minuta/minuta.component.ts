@@ -40,6 +40,9 @@ export class MinutaComponent {
     Peso_Anterior2: 0,
     Altura: 0,
     IMC: 0,
+    IMC_Anterior:0,
+    IMC_Anterior2:0,
+    Contex_Fisica:'',
     Genero: ''
   }
   navigationSubscription?: Subscription;
@@ -74,23 +77,33 @@ export class MinutaComponent {
   segundo_registro: any = localStorage.getItem('PesoA')
   registro_actual: any = localStorage.getItem('PesoA2')
 
+  primer_IMC: any = localStorage.getItem('IMC')
+  segundo_IMC: any = localStorage.getItem('IMCA')
+  IMC_actual: any = localStorage.getItem('IMCA2')
+
+  cantidad_archivos:any
+
   url_ = '/' + this.usuarioa + '/' + this.nombrea + '/' + this.apellidoa
   // this.primer_registro, this.segundo_registro, this.registro_actual
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.obtenerUser()
+    this.getFileCount()
   }
 
 
   obtenerUser() {
     this.usuario.getusuario(this.usuarioa).subscribe((res: any) => {
       this.user = res
-      localStorage.setItem('Peso', this.user.Peso.toString())
-      localStorage.setItem('PesoA', this.user.Peso_Anterior.toString())
-      localStorage.setItem('PesoA2', this.user.Peso_Anterior2.toString())
-
       console.log(this.user)
+      
+    })
+  }
+  getFileCount(){
+    this.usuario.countFile(this.usuarioa).subscribe((res:any)=>{
+      this.cantidad_archivos=res[0]
+      console.log(this.cantidad_archivos)
     })
   }
 
@@ -153,6 +166,23 @@ export class MinutaComponent {
       }
     ]
   };
+  public lineChartDataIMC: ChartConfiguration<'line'>['data'] = {
+    labels: [
+      '',
+      '',
+      'IMC Actual'
+    ],
+    datasets: [
+      {
+        data: [this.primer_IMC, this.segundo_IMC, this.IMC_actual],
+        label: 'IMC',
+        fill: true,
+        tension: 0.5,
+        borderColor: 'black',
+        backgroundColor: 'rgba(0, 255, 0, 0.5)'
+      }
+    ]
+  };
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: false
   };
@@ -162,5 +192,9 @@ export class MinutaComponent {
     localStorage.removeItem('Peso')
     localStorage.removeItem('PesoA')
     localStorage.removeItem('PesoA2')
+
+    localStorage.removeItem('IMC')
+    localStorage.removeItem('IMCA')
+    localStorage.removeItem('IMCA2')
   }
 }

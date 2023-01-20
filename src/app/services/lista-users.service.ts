@@ -9,6 +9,7 @@ import { response } from '../models/response.interface';
 })
 export class ListaUsersService {
   _url="/api/usuarios"
+  url2='/api/archivo/cuenta'
   urldelete: string="";
 
   constructor(private http:HttpClient) { }
@@ -56,4 +57,11 @@ deleteUser(id:number):Observable<any>{
       headers:header
     });
     };
+
+    countFile(id:number):Observable<any>{
+      let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+      return this.http.get(this.url2+'/'+id)
+    }
 }

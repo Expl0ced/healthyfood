@@ -17,10 +17,12 @@ export class usuario{
     IMC_Anterior:number;
     IMC_Anterior2:number;
     Genero:string;
+    Contex_Fisica:string;
 
 
     constructor(idUser:number, Nombre:string, Apellido:string, Rol:string, Password:string, 
-        Email:string, Sintomas:string, Img:string, Asignado:string, Peso:number, Altura:number, IMC:number, Genero:string, Peso_Anterior:number, Peso_Anterior2:number, IMC_Anterior2:number, IMC_Anterior:number){
+        Email:string, Sintomas:string, Img:string, Asignado:string, Peso:number, Altura:number, IMC:number, Genero:string, 
+        Peso_Anterior:number, Peso_Anterior2:number, IMC_Anterior2:number, IMC_Anterior:number, Contex_Fisica:string){
 
         this.idUser=idUser;
         this.Nombre=Nombre;
@@ -39,7 +41,8 @@ export class usuario{
         this.Peso_Anterior=Peso_Anterior;
         this.Peso_Anterior2=Peso_Anterior2;
         this.IMC_Anterior=IMC_Anterior,
-        this.IMC_Anterior2=IMC_Anterior2
+        this.IMC_Anterior2=IMC_Anterior2,
+        this.Contex_Fisica=Contex_Fisica
 
     }
 }
