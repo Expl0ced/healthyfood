@@ -38,7 +38,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { RouterModule } from '@angular/router';
 import { ComodinComponent } from './components/comodin/comodin.component';
 import { RecetasGuardadasComponent } from './components/recetas-guardadas/recetas-guardadas.component';
 
