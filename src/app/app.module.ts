@@ -11,11 +11,6 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { ShareModule } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
-import { faFilm,faFish } from '@fortawesome/free-solid-svg-icons';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
   
 //componentes   
 import { AppComponent } from './app.component';
@@ -47,11 +42,6 @@ import { RouterModule } from '@angular/router';
 import { ComodinComponent } from './components/comodin/comodin.component';
 import { RecetasGuardadasComponent } from './components/recetas-guardadas/recetas-guardadas.component';
 
-
-const icons = [
-
-  faFacebookSquare
-];
 
 
 const shareProp = {
@@ -117,8 +107,5 @@ const shareProp = {
   ]
 })
 export class AppModule {
-  constructor(iconLibrary: FaIconLibrary, library: FaIconLibrary) {
-    iconLibrary.addIcons(faFilm, faFish);
-    library.addIconPacks(fas, far);
-  }
+
 }
