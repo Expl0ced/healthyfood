@@ -36,7 +36,8 @@
                 </div>
             </div>
             <div class="col">
-                <button class="btn btn-secondary" (click)="guardarReceta()" style="margin-bottom: 4%;">Guardar Receta en Favoritos</button>
+                <button *ngIf="recipe.idReceta" class="btn btn-secondary" (click)="guardarReceta()" style="margin-bottom: 4%;">Guardar Receta en Favoritos</button><br>
+                <button *ngIf="!recipe.idReceta==recetas.IdReceta" class="btn btn-secondary" (click)="deleteReceta()" style="margin-bottom: 4%;">Borrar Receta</button>
                 <div class="row">
                     <img src="{{ recetas.Imagen }}" class="imagen_receta" alt="" width="250">
                     

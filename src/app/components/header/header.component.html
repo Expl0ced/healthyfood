@@ -14,7 +14,10 @@
                     <a class="nav-link" routerLink="registro" *ngIf="rol=='admin'">Listado de Usuarios</a>
                 </li>
                 <li class="nav-item" *ngIf="token">
-                    <a class="nav-link" routerLink="orden">Perfil</a>
+                    <a *ngIf="rol=='nutricionista' || rol=='admin'" class="nav-link" routerLink="orden">Control</a>
+                </li>
+                <li class="nav-item" *ngIf="token">
+                    <a class="nav-link" href="perfil">Perfil</a>
                 </li>
                 <li class="nav-item" *ngIf="token">
                     <a class="nav-link" routerLink="Favoritas">Recetas Favoritas</a>
