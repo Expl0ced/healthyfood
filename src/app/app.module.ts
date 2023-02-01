@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { UploaderModule } from "angular-uploader";
 import { ShareModule } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -97,7 +96,6 @@ const shareProp = {
     ToastrModule.forRoot({
     }), // ToastrModule added
     NgxFileDropModule,
-    UploaderModule,
     ShareModule,
     FontAwesomeModule,
     ShareButtonsModule.withConfig({ prop: shareProp }),
