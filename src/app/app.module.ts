@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxFileDropModule } from 'ngx-file-drop';
 import { ShareModule } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { RouterModule, Routes } from '@angular/router';
@@ -41,6 +40,7 @@ import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ComodinComponent } from './components/comodin/comodin.component';
 import { RecetasGuardadasComponent } from './components/recetas-guardadas/recetas-guardadas.component';
+import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 
 
 
@@ -54,6 +54,24 @@ const shareProp = {
 };
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({}),
+    ShareModule,
+    ShareButtonsModule.withConfig({ prop: shareProp }),
+    ColorPickerModule,
+    NgChartsModule,
+    RouterModule,
+    FontAwesomeModule,
+    AgGridModule,
+    AgChartsAngularModule,
+  ],
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -74,26 +92,7 @@ const shareProp = {
     InicioComponent,
     ComodinComponent,
     RecetasGuardadasComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot({
-    }), // ToastrModule added
-    NgxFileDropModule,
-    ShareModule,
-    ShareButtonsModule.withConfig({ prop: shareProp }),
-    AgGridModule,
-    AgChartsAngularModule,
-    ColorPickerModule,
-    NgChartsModule,
-    RouterModule,
-    FontAwesomeModule,
+    HeroDetailComponent,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
