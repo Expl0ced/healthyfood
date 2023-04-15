@@ -10,8 +10,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ShareModule } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { RouterModule, Routes } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-  
+
 //componentes   
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -47,8 +48,8 @@ const shareProp = {
   facebook: {
     icon: ['fab', 'facebook-square']
   },
-  twitter:{
-    icon:['fab', 'square-twitter']
+  twitter: {
+    icon: ['fab', 'square-twitter']
   }
 };
 
@@ -86,19 +87,20 @@ const shareProp = {
     }), // ToastrModule added
     NgxFileDropModule,
     ShareModule,
-    FontAwesomeModule,
     ShareButtonsModule.withConfig({ prop: shareProp }),
     AgGridModule,
     AgChartsAngularModule,
     ColorPickerModule,
     NgChartsModule,
+    RouterModule,
+    FontAwesomeModule,
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     ModificarUserService,
     JwtHelperService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenintercepterService, multi: true },
-    { provide: NgChartsConfiguration, useValue: { generateColors: false }}
+    { provide: NgChartsConfiguration, useValue: { generateColors: false } }
   ],
   bootstrap: [AppComponent],
   schemas: [
