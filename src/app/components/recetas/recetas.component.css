@@ -22,3 +22,8 @@ img{
     animation-name: bounce;
     animation-timing-function: ease;
 }
+.prueba{
+    background-color:red; 
+    margin-left:5px;
+    float:left
+}

@@ -40,11 +40,6 @@
                             ¡Se ve bien!
                         </div>
                     </div>
-
-
-                    <!-- <div class="valid-feedback">
-                        Nombre Valido
-                    </div> -->
                 </div>
                 <div class="col-md-12">
                     <label for="validationCustom02" class="form-label">Ingredientes</label>
@@ -52,18 +47,22 @@
                         <span class="input-group-text">
                             <i class="fa-solid fa-circle-user"></i>
                         </span>
-                        <textarea type="text" [(ngModel)]="recetas.Ingredientes" 
-                        placeholder="Separa los ingredientes usando comas y enumera usando guion" [ngModelOptions]="{ standalone: true }"
-                            class="form-control" id="ingredientes" required></textarea>
+                        <textarea type="text" (keydown)="addSymbol($event)" (paste)="onPaste($event)"
+                            [(ngModel)]="recetas.Ingredientes"
+                            placeholder="Separa los ingredientes usando comas y enumera usando guion"
+                            [ngModelOptions]="{ standalone: true }" class="form-control" id="ingredientes"
+                            required></textarea>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <label for="validationCustomUsername" class="form-label">Preparacion</label>
                     <div class="input-group input-group">
                         <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-at"></i></span>
-                        <textarea type="text" [(ngModel)]="recetas.Preparacion" placeholder="Separa los pasos usando comas y enumera usando guion" [ngModelOptions]="{ standalone: true }"
-                            class="form-control" id="preparacion" aria-describedby="inputGroupPrepend"
-                            required></textarea>
+                        <textarea type="text" (keydown)="addSymbol($event)" (paste)="onPaste($event)"
+                            [(ngModel)]="recetas.Preparacion"
+                            placeholder="Separa los pasos usando comas y enumera usando guion"
+                            [ngModelOptions]="{ standalone: true }" class="form-control" id="preparacion"
+                            aria-describedby="inputGroupPrepend" required></textarea>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -72,8 +71,11 @@
                         <span class="input-group-text">
                             <i class="fa-solid fa-users-viewfinder"></i>
                         </span>
-                        <textarea type="text" [(ngModel)]="recetas.Notas" placeholder="Separa usando comas y enumera usando guion, por ejemplo, algun ingrediente que se pueda reemplazar o paso que no sea 100% necesario" [ngModelOptions]="{ standalone: true }"
-                            class="form-control" minlength="10" id="notas" required></textarea>
+                        <textarea type="text" (keydown)="addSymbol($event)" (paste)="onPaste($event)"
+                            [(ngModel)]="recetas.Notas"
+                            placeholder="Separa usando comas y enumera usando guion, por ejemplo, algun ingrediente que se pueda reemplazar o paso que no sea 100% necesario"
+                            [ngModelOptions]="{ standalone: true }" class="form-control" minlength="10" id="notas"
+                            required></textarea>
                     </div>
 
                 </div>
@@ -83,36 +85,40 @@
                         <span class="input-group-text">
                             <i class="fa-solid fa-lock"></i>
                         </span>
-                        <textarea type="text" [(ngModel)]="recetas.Detalles" placeholder="Separa los detalles usando comas y enumera usando guion, por ejemplo: cantidad de porciones, tiempo de cocción" [ngModelOptions]="{ standalone: true }"
-                            class="form-control" minlength="10" id="detalles" required></textarea>
+                        <textarea type="text" (keydown)="addSymbol($event)" (paste)="onPaste($event)"
+                            [(ngModel)]="recetas.Detalles"
+                            placeholder="Separa los detalles usando comas y enumera usando guion, por ejemplo: cantidad de porciones, tiempo de cocción"
+                            [ngModelOptions]="{ standalone: true }" class="form-control" minlength="10" id="detalles"
+                            required></textarea>
                         <div class="valid-feedback">
                             Looks good!
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <label for="validationCustom05" class="form-label center">Imagen de cabecera</label>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary">
+                            <input type="file" class="form-control-file" accept="image/*" name="image"
+                                (change)="selectImageCabecera($event)">
+                        </button>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustom05" class="form-label center">Etiqueta</label>
+                    <div>
+                        <button type="button" class="btn btn-outline-primary">
+                            <input type="file" class="form-control-file" accept="image/*" name="etiqueta"
+                                (change)="selectImageEtiqueta($event)">
+                        </button>
+                    </div>
+
+                </div>
+
                 <div class="col-md-12">
                     <button class="btn btn-success" (click)="showTostada()" type="submit">Enviar</button>
                 </div>
-            </form>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <hr>
-        <div class="col-3"></div>
-        <div class="col-9 card-body center">
-            <h3>Actualizar la imagen y etiqueta de la ultima receta agrega recientemente</h3>
-            <form (ngSubmit)="onSubmitRecipe(0)">
-                
-                <div class="center">Actualizar Imagen<button type="button" class="btn btn-outline-primary">
-                    <input type="file" class="form-control-file" accept="image/*" name="image" (change)="selectImage($event)"></button>
-                <button type="submit" class="btn btn-outline-success">Actualizar</button></div>
-            </form>
-            <form (ngSubmit)="onSubmitEtiqueta(0)">
-            <div class="center">
-                Actualizar Etiqueta
-                <button type="button" class="btn btn-outline-primary">
-                    <input type="file" class="form-control-file" accept="image/*" name="image" (change)="selectImage($event)"></button>
-                <button type="submit" class="btn btn-outline-success">Actualizar</button></div>
             </form>
         </div>
     </div>

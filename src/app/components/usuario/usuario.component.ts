@@ -108,5 +108,17 @@ export class UsuarioComponent implements OnInit {
   //   }, 500);
   // }
 
+  usuarioExiste(){
+    this._userservice.usuarioExists(this.user.Email, this.user.Password).subscribe((res:any) =>{
+      console.log(res)
+      if(Object.entries(res).length === 0){
+        this.registrarUsuario()
+      }
+      else{
+        this.tostada.warning('ya utilizados', 'Correo o Contraseña', { positionClass: 'toast-bottom-right' })
+      }
+    })
+  }
+
 }
 

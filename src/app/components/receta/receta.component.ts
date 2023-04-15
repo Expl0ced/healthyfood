@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ViewRecetaService } from 'src/app/services/view-receta.service';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { SaverecipeService } from 'src/app/services/saverecipe.service';
-import { timeout } from 'rxjs';
 
 
 @Component({
@@ -31,10 +29,12 @@ export class RecetaComponent implements OnInit {
 
   constructor(private recetaService: ViewRecetaService,
     private activerouter: ActivatedRoute, private tostada: ToastrService,
-    private saverecipe: SaverecipeService) { }
+    private saverecipe: SaverecipeService,
+    private cd: ChangeDetectorRef) { }
   ngOnInit(): void {
     this.obtenerReceta()
     this.checkRecipe()
+    this.updateColor()
   }
 
   obtenerReceta() {
@@ -52,30 +52,68 @@ export class RecetaComponent implements OnInit {
 
 
       arrayING = this.recetas.Ingredientes
-      let arr = arrayING.split(',')
-      let err = arr.map((item: any) => {
-        return item.replace("[", "").replace("'", '').replace("]", '').replace("'", '')
-      })
-      this.ingredientes = err
+      if (this.recipe.idReceta <= 1615) {
+        let arr = arrayING.split(',')
+        let err = arr.map((item: any) => {
+          return item.replace("[", "").replace("'", '').replace("]", '').replace("'", '').replace("\n", ', ')
+        })
+        this.ingredientes = err
+      }
+      else {
+        let arr = arrayING.split('♦')
+        console.log(arr)
+        let err = arr.map((item: any) => {
+          return item.replace("♦\n", ",")
+        })
+        this.ingredientes = err
+      }
+
 
       arrayPREP = this.recetas.Preparacion
-      let prepsplit = arrayPREP.split(',')
-      let prepmap = prepsplit.map((item: any) => {
-        return item.replace("'['", "").replace("']'", '').replace("'", "").replace(".'", ".")
-      })
-      this.preparacion = prepmap
+      if (this.recipe.idReceta <= 1615) {
+        let prepsplit = arrayPREP.split(',')
+        let prepmap = prepsplit.map((item: any) => {
+          return item.replace("'['", "").replace("']'", '').replace("'", "").replace(".'", ".")
+        })
+        this.preparacion = prepmap
+      }
+      else {
+        let prepsplit = arrayPREP.split('♦')
+        let prepmap = prepsplit.map((item: any) => {
+          return item.replace("♦", "")
+        })
+        this.preparacion = prepmap
+      }
+
 
       arrayNOT = this.recetas.Notas
-      let notmap = arrayNOT.replace("'['", '').replace(".','", '.').replace("','", ",").replace("!','", '!').replace("']'", '')
-      this.notas = notmap
+      if (this.recipe.idReceta <= 1615) {
+        let notmap = arrayNOT.replace("'['", '').replace(".','", '.').replace("','", ",").replace("!','", '!').replace("']'", '')
+        this.notas = notmap
+      }
+      else {
+        let notmap = arrayNOT.replace("♦", "\n")
+        this.notas = notmap
+      }
+
+
 
       arrayDET = this.recetas.Detalles
       let comodin = arrayDET.replace("'[',", '')
-      let detsplit = comodin.split(',')
-      let detmap = detsplit.map((item: any) => {
-        return item.replace("'", "").replace("',", ",").replace("']'", '').replace("'", '')
-      })
-      this.detalles = detmap
+        if (this.recipe.idReceta <= 1615) {
+          let detsplit = comodin.split(',')
+          let detmap = detsplit.map((item: any) => {
+          return item.replace("[", '').replace("'", "").replace("',", ",").replace("']'", '').replace("'", '').replace("'", "")
+        })
+        this.detalles = detmap
+        }
+        else {
+          let detsplit = comodin.split('♦')
+          let detmap = detsplit.map((item: any) => {
+          return item.replace("♦", "\n")
+        })
+        this.detalles = detmap
+        }
 
     });
 
@@ -98,7 +136,7 @@ export class RecetaComponent implements OnInit {
 
   deleteReceta() {
     this.saverecipe.deleteRecipe(this.recipe.idReceta).subscribe((res: any) => {
-      this.recipe.idReceta=res
+      this.recipe.idReceta = res
       console.log(res)
       setTimeout(() => {
         location.reload
@@ -106,9 +144,14 @@ export class RecetaComponent implements OnInit {
     })
   }
 
-  checkRecipe(){
-    this.saverecipe.comprobarRecipe(this.recipe.idReceta).subscribe((res:any)=>{
+  checkRecipe() {
+    this.saverecipe.comprobarRecipe(this.recipe.idReceta).subscribe((res: any) => {
       console.log(res)
     })
   }
+  updateColor(): void {
+    // Actualizar la propiedad color aquí
+    this.cd.detectChanges(); // Forzar la detección de cambios después de actualizar color
+  }
+
 }

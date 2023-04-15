@@ -29,8 +29,8 @@
                         <div class="col-md-6">
                             <div class="card-body">
                                 <div *ngFor="let element of files">
-                                    <a href="{{element.imagen}}" class="btn btn-primary mt-5" target="_blank" download="Minuta {{nombre}} {{apellido}}.csv">Descargar Archivo de fecha {{element.fecha_creacion}}</a>
-
+                                    <!-- <a href="{{path2}}{{element.imagen}}" class="btn btn-primary mt-5" download>Descargar Archivo de fecha {{element.fecha_creacion}}</a> -->
+                                    <button (click)="downloadFile()" class="btn btn-primary mt-5">Descargar archivo</button>
                                 </div>
                             </div>
                         </div>
