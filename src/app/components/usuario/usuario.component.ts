@@ -105,7 +105,7 @@ export class UsuarioComponent implements OnInit{
   //   this.tostada.success('Usuario registrado con exito')
   //   setTimeout(() => {
   //     this.router.navigate(['recetas']);
-  //   }, 500);
+  //   }, 500); wwwww
   // }
 
   usuarioExiste(){
