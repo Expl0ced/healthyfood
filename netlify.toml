@@ -1,6 +1,7 @@
 [build]
   publish = "dist/healthyfood"
   command = "ng build --configuration production --aot"
+  
 [[redirects]]
   from = "/*"
   to = "src/index.html"

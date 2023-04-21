@@ -8,7 +8,7 @@ import { Item } from '../models/receta';
 })
 export class RecetaService {
   // _url="http://localhost:3000"
-  url_ = "/api/recetas/"
+  url_ = "https://apihealthyfood.netlify.app/api/recetas"
   url2 = 'http://localhost:3300/';
   constructor(private http: HttpClient) {
   }
