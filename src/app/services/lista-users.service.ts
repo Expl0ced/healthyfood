@@ -36,7 +36,7 @@ export class ListaUsersService {
   getusuario(id: number): Observable<usuario> {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
-    return this.http.get<usuario>(this._url + '/' + id)
+    return this.http.get<usuario>(this._url + '/' + id, {headers:header})
   }
 
   updateUser(usuario: usuario): Observable<usuario> {
@@ -60,7 +60,7 @@ export class ListaUsersService {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
-    return this.http.get(this.url2 + '/' + id)
+    return this.http.get(this.url2 + '/' + id,{headers:header})
   }
 
 
@@ -68,6 +68,6 @@ export class ListaUsersService {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
-      return this.http.get(this._url+'/usuarioExists/'+Email+'/'+Password)
+      return this.http.get(this._url+'usuarioExists/'+Email+'/'+Password,{headers:header})
   }
 }
