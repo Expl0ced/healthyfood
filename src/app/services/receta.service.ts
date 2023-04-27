@@ -8,14 +8,14 @@ import { Item } from '../models/receta';
 })
 export class RecetaService {
   // _url="http://localhost:3000"
-  url_ = "https://apihealthyfood.netlify.app/api/recetas"
+  url_ = "https://api-rest-tesis.vercel.app/api/recetas/"
   url2 = 'http://localhost:3300/';
   constructor(private http: HttpClient) {
   }
 
   getReceta(): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.get<any>(this.url_, {
       headers: header
@@ -33,7 +33,7 @@ export class RecetaService {
   // }
   getRecetabyID(id: any): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.get<Item>(this.url_ + id, {
       headers: header
@@ -42,7 +42,7 @@ export class RecetaService {
   }
   postReceta(receta: any): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
     return this.http.post<any>(this.url_, receta, {
       headers: header
     })
@@ -50,7 +50,7 @@ export class RecetaService {
 
   updateImagenReceta(recipeIMG:any): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.post<any>(this.url2+"imgrecipe", recipeIMG, {
         headers:header
       })
@@ -58,7 +58,7 @@ export class RecetaService {
 
   lastRecipe():Observable<any>{
     let header = new HttpHeaders()
-    .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
     return this.http.get<any>(this.url_+"ultima/ingreso",{
       headers:header
     })

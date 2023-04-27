@@ -6,13 +6,13 @@ import { usuario } from '../models/usuario';
   providedIn: 'root'
 })
 export class ModificarUserService {
-  url_='/api/modificar_user/'
+  url_='https://api-rest-tesis.vercel.app/api/modificar_user/'
   id=localStorage.getItem('idUser')
   constructor(private http:HttpClient) { }
 
   getusuario(id:number):Observable<usuario>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.get<usuario>(this.url_+id,{
         headers:header
       });
@@ -20,7 +20,7 @@ export class ModificarUserService {
 
   getUserLibres():Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.get<any>(this.url_,{
         headers:header
       });
@@ -28,7 +28,7 @@ export class ModificarUserService {
   
   postOrden(usuario:any):Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.post<any>(this.url_, usuario, {
         headers:header
       })
@@ -36,7 +36,7 @@ export class ModificarUserService {
 
   updateUser(usuario:usuario, id:number):Observable<usuario>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.put<usuario>(this.url_+id, usuario, {
         headers:header
       })
@@ -45,7 +45,7 @@ export class ModificarUserService {
 
   asigUser(orden:any):Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.post<any>(this.url_, orden,{
         headers:header
       })

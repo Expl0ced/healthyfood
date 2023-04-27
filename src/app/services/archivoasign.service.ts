@@ -6,14 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ArchivoasignService {
-  url='/api/archivo/'
+  url='https://api-rest-tesis.vercel.app/api/archivo/'
   path:any='C:/Users/explo/app tesis/healthyfood/src/'
   constructor(private http:HttpClient) { }
 
 
   getArchivos(idUser:any):Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.get<any>(this.url+idUser,{
         headers:header
       })  

@@ -8,21 +8,23 @@ import { Observable } from 'rxjs';
 export class ImagenService {
 
 
-  url='/api/avatar'
-  constructor(private http:HttpClient) { }
+  url = 'https://apihealthyfood.netlify.app/api/avatar'
+  constructor(private http: HttpClient) { }
 
-  postImg(img:any):Observable<any>{
+  postImg(img: any): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'multipart/form-data')
+      .set('Content-Type', 'multipart/form-data')
+      .set('Accept', 'application/json');
     return this.http.post<any>(this.url, img, {
-      headers:header
+      headers: header
     });
   }
 
-  getImg(id:number):Observable<any>{
+  getImg(id: number): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'multipart/form-data')
-      return this.http.get<any>(this.url+'/'+id,)
+      .set('Content-Type', 'multipart/form-data')
+      .set('Accept', 'application/json');
+    return this.http.get<any>(this.url + '/' + id,)
   }
 
 

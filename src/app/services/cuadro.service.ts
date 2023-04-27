@@ -8,7 +8,7 @@ import { usuario } from '../models/usuario';
 })
 export class CuadroService {
 
-  url='/api/usuarios/'
+  url='https://api-rest-tesis.vercel.app/api/usuarios/'
 
 
 
@@ -18,14 +18,14 @@ export class CuadroService {
 
   updateUser(usuario:usuario, id:number):Observable<usuario>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.put<usuario>(this.url+id, usuario, {
         headers:header
       })
     };
     getusuario(id:number):Observable<usuario>{
       let header = new HttpHeaders()
-        .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
         return this.http.get<usuario>(this.url+id,{
           headers:header
         });

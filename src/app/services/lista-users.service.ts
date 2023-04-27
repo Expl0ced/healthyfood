@@ -8,8 +8,8 @@ import { response } from '../models/response.interface';
   providedIn: 'root'
 })
 export class ListaUsersService {
-  _url = "/api/usuarios"
-  url2 = '/api/archivo/cuenta'
+  _url = "https://api-rest-tesis.vercel.app/api/usuarios"
+  url2 = 'https://api-rest-tesis.vercel.app/api/archivo/cuenta'
   urldelete: string = "";
 
   constructor(private http: HttpClient) { }
@@ -18,7 +18,7 @@ export class ListaUsersService {
 
   obtenerUsers(): Observable<usuario[]> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.get<usuario[]>(this._url, {
       headers: header
@@ -27,8 +27,7 @@ export class ListaUsersService {
 
   createUser(user: usuario): Observable<usuario> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
-
+      .set('Content-Type', 'application/json')
     return this.http.post<usuario>(this._url, user, {
       headers: header
     });
@@ -36,14 +35,13 @@ export class ListaUsersService {
 
   getusuario(id: number): Observable<usuario> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
     return this.http.get<usuario>(this._url + '/' + id)
   }
 
   updateUser(usuario: usuario): Observable<usuario> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
-
+      .set('Content-Type', 'application/json')
     return this.http.put<usuario>(this._url, usuario, {
       headers: header
     });
@@ -51,7 +49,7 @@ export class ListaUsersService {
 
   deleteUser(id: number): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.delete<response>(this._url + '/' + id, {
       headers: header
@@ -60,7 +58,7 @@ export class ListaUsersService {
 
   countFile(id: number): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.get(this.url2 + '/' + id)
   }
@@ -68,7 +66,7 @@ export class ListaUsersService {
 
   usuarioExists(Email:any, Password:any):Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
       return this.http.get(this._url+'/usuarioExists/'+Email+'/'+Password)
   }

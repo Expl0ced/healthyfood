@@ -9,26 +9,27 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
-
-
-
 export class ApiService {
 
-_url="https://apihealthyfood.netlify.app/api/login"
-
-
+  _url = "https://api-rest-tesis.vercel.app/api/login/"
 
   constructor(
-    private http:HttpClient,
+    private http: HttpClient,
     private jwtHelper: JwtHelperService) { }
 
-  singin(user:any){
+  singin(user: any){
+    let header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+    return this.http.post(this._url, user, { headers: header });
+  }
+
+  enter(user: any): Observable<any> {
     return this.http.post(this._url, user);
   }
 
-  isAuth():boolean{
-    const token:any = localStorage.getItem('token');
-    if(this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')){
+  isAuth(): boolean {
+    const token: any = localStorage.getItem('token');
+    if (this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')) {
       return false;
     }
     return true;

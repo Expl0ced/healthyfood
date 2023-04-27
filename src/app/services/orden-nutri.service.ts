@@ -7,14 +7,14 @@ import { orden } from '../models/orden';
   providedIn: 'root'
 })
 export class OrdenNutriService {
-  url_="/api/orden_nutri/"
+  url_="https://api-rest-tesis.vercel.app/api/orden_nutri/"
 
   constructor(private http:HttpClient) { }
 
 
   verOrdenes(id:number): Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
       return this.http.get<any>(this.url_+id, {
         headers:header
@@ -22,7 +22,7 @@ export class OrdenNutriService {
   }
   verOrdenesNombre(nombre:string, apellido:string): Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
       return this.http.get<any>(this.url_+'nombre/'+nombre+'/apellido/'+apellido, {
         headers:header
@@ -31,7 +31,7 @@ export class OrdenNutriService {
 
   verOrden(): Observable<orden>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
       return this.http.get<orden>(this.url_, {
         headers:header
@@ -40,7 +40,7 @@ export class OrdenNutriService {
 
   obtenerImgUser(id:number){
     let header = new HttpHeaders()
-    .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.get<any>(this.url_+"imguser/"+id,{
       headers:header

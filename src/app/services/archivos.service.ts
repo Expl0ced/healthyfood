@@ -14,7 +14,8 @@ export class ArchivosService {
 
   sendPost(body: FormData): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'multipart/form-data')
+      .set('Content-Type', 'multipart/form-data')
+      .set('Accept', 'application/json');
     return this.http.post(this.url, body, {
       headers: header
     })

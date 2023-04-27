@@ -13,7 +13,7 @@ export class ViewRecetaService {
 
   constructor(private http:HttpClient) { }
 
-  url_="/api/recetas/"
+  url_="https://api-rest-tesis.vercel.app/api/recetas/"
 
 
 
@@ -21,7 +21,7 @@ export class ViewRecetaService {
 
   getRecetabyID(id:string):Observable<Item>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
       return this.http.get<Item>((this.url_+id), {
         headers:header

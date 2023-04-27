@@ -7,13 +7,13 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
   providedIn: 'root'
 })
 export class SaverecipeService {
-  url = '/api/saverecipe/'
+  url = 'https://api-rest-tesis.vercel.app/api/saverecipe/'
 
   constructor(private http: HttpClient) { }
 
   getRecipe(id: number): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.get<any>(this.url + id, {
       headers: header
@@ -23,7 +23,7 @@ export class SaverecipeService {
 
   saveRecipe(recipe: any): Observable<any> {
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
 
     return this.http.post<any>(this.url, recipe, {
       headers: header
@@ -32,7 +32,7 @@ export class SaverecipeService {
 
   deleteRecipe(id:any):Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.delete<any>(this.url+id,{
         headers: header
       })
@@ -40,7 +40,7 @@ export class SaverecipeService {
 
   comprobarRecipe(id:any):Observable<any>{
     let header = new HttpHeaders()
-      .set('Type-content', 'aplication/json')
+      .set('Content-Type', 'application/json')
       return this.http.get<any>(this.url+'comprobar/'+id,{
         headers:header
       })
