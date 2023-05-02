@@ -68,6 +68,6 @@ export class ListaUsersService {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
-      return this.http.get(this._url+'usuarioExists/'+Email+'/'+Password,{headers:header})
+      return this.http.get(this._url+'/'+'usuarioExists/'+Email+'/'+Password,{headers:header})
   }
 }
