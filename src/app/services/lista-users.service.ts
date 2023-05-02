@@ -8,7 +8,7 @@ import { response } from '../models/response.interface';
   providedIn: 'root'
 })
 export class ListaUsersService {
-  _url = "https://api-rest-tesis.vercel.app/api/usuarios"
+  _url = "https://api-rest-tesis.vercel.app/api/usuarios/"
   url2 = 'https://api-rest-tesis.vercel.app/api/archivo/cuenta'
   urldelete: string = "";
 
@@ -68,6 +68,6 @@ export class ListaUsersService {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
-      return this.http.get(this._url+'usuarioExists/'+Email+'/'+Password,{headers:header})
+      return this.http.get(this._url+'/usuarioExists/'+Email+'/'+Password,{headers:header})
   }
 }

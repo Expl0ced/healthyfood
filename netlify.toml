@@ -6,7 +6,10 @@
   from = "/*"
   to = "src/index.html"
   status = 200
-
+[[redirects]]
+  from = "/inicio"
+  to = "src/index.html"
+  status = 200
 [[headers]]
 for = "/*"
 [headers.values]
