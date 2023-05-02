@@ -8,17 +8,16 @@ import { Item } from '../models/receta';
 })
 export class RecetaService {
   // _url="http://localhost:3000"
-  url_ = "https://api-rest-tesis.vercel.app/api/recetas/"
+  url_:any = "https://api-rest-tesis.vercel.app/api/recetas/"
   url2 = 'http://localhost:3300/';
   constructor(private http: HttpClient) {
   }
-
   getReceta(): Observable<any> {
     let header = new HttpHeaders()
-      .set('Content-Type', 'application/json')
+      .set('Content-Type', 'application/json; charset=utf-8')
 
     return this.http.get<any>(this.url_, {
-      headers: header
+      headers:header
     });
   }
 

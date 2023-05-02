@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   logIn() {
+    console.log(this.user)
     this.api.singin(this.user).subscribe((res: any) => {
       for (let element of this.user.email) {
         for (let x of element) {
@@ -38,13 +39,14 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('token', res.token);
                 const { Rol }: any = decode(res.token)
                 this.tostada.success('Datos Ingresados con exito')
-                
+
               }
               else {
                 this.tostada.warning('La contraseña ingresada no cumple con el minimo permitido')
               }
             }
             else {
+              this.tostada.warning('El correo ingresado no es válido');
             }
 
           }
@@ -59,8 +61,8 @@ export class LoginComponent implements OnInit {
 
   enter(){
     console.log(this.user)
-    this.api.singin(this.user).subscribe((res: any) =>{
-      console.log(res)
+    this.api.enter(this.user).subscribe((res: any) =>{
+      console.log(res.token)
     })
   }
 }

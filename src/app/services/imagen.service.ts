@@ -14,7 +14,6 @@ export class ImagenService {
   postImg(img: any): Observable<any> {
     let header = new HttpHeaders()
       .set('Content-Type', 'multipart/form-data')
-      .set('Accept', 'application/json');
     return this.http.post<any>(this.url, img, {
       headers: header
     });
@@ -23,7 +22,6 @@ export class ImagenService {
   getImg(id: number): Observable<any> {
     let header = new HttpHeaders()
       .set('Content-Type', 'multipart/form-data')
-      .set('Accept', 'application/json');
     return this.http.get<any>(this.url + '/' + id,)
   }
 

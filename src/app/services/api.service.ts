@@ -17,17 +17,17 @@ export class ApiService {
     private http: HttpClient,
     private jwtHelper: JwtHelperService) { }
 
-  singin(user: any){
+  singin(user: any): Observable<any> {
     let header = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-    return this.http.post(this._url, user, { headers: header });
+    .set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(this._url, user,{headers:header});
   }
 
   enter(user: any): Observable<any> {
     return this.http.post(this._url, user);
   }
 
-  isAuth(): boolean {
+  isAuth():boolean{
     const token: any = localStorage.getItem('token');
     if (this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')) {
       return false;
