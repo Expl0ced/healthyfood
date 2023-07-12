@@ -23,6 +23,12 @@ export class ApiService {
     return this.http.post(this._url, user,{headers:header});
   }
 
+  singinNutri(user: any): Observable<any> {
+    let header = new HttpHeaders()
+    .set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.post(this._url+"nutri", user,{headers:header});
+  }
+
   enter(user: any): Observable<any> {
     return this.http.post(this._url, user);
   }

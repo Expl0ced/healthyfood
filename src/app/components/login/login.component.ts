@@ -58,6 +58,38 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/inicio']);
     })
   }
+  logInNutri() {
+    console.log(this.user)
+    this.api.singinNutri(this.user).subscribe((res: any) => {
+      for (let element of this.user.email) {
+        for (let x of element) {
+          let caracter = this.user.email.substr(-4)
+          let caracter2 = this.user.email.substr(-3)
+          if (caracter == '.com' || caracter2 == '.es' || caracter2 == '.cl') {
+            if (x == '@') {
+              if (this.user.pass.length >= 10) {
+                localStorage.setItem('token', res.token);
+                const { Rol }: any = decode(res.token)
+                this.tostada.success('Datos Ingresados con exito')
+
+              }
+              else {
+                this.tostada.warning('La contraseña ingresada no cumple con el minimo permitido')
+              }
+            }
+            else {
+              this.tostada.warning('El correo ingresado no es válido');
+            }
+
+          }
+          else {
+            this.tostada.warning('El correo ingresado no corresponde a algun correo permitido')
+          }
+        }
+      }
+      this.router.navigate(['/inicio']);
+    })
+  }
 
   enter(){
     console.log(this.user)

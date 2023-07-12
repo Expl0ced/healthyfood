@@ -7,7 +7,7 @@ import { usuario } from '../models/usuario';
 })
 export class ModificarUserService {
   url_='https://api-rest-tesis.vercel.app/api/modificar_user/'
-  id=localStorage.getItem('idUser')
+  // id=localStorage.getItem('idUser')
   constructor(private http:HttpClient) { }
 
   getusuario(id:number):Observable<usuario>{
@@ -18,10 +18,10 @@ export class ModificarUserService {
       });
   };
 
-  getUserLibres():Observable<any>{
+  getUserLibres(id:number):Observable<any>{
     let header = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      return this.http.get<any>(this.url_,{
+      .set('Content-Type', 'application/json')  
+      return this.http.get<any>(this.url_+"listado/"+id,{
         headers:header
       });
   };

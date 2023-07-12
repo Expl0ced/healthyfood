@@ -5,6 +5,9 @@ import { ListaUsersService } from 'src/app/services/lista-users.service';
 import Swal from 'sweetalert2';
 import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
 import { Subscription } from 'rxjs';
+import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-minuta',
@@ -66,22 +69,27 @@ export class MinutaComponent {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor(private http: HttpClient, private activerouter: ActivatedRoute, private usuario: ListaUsersService, private router: Router, public changeDetector: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private activerouter: ActivatedRoute, private usuario: ListaUsersService, 
+    private router: Router, public changeDetector: ChangeDetectorRef,  private storage: Storage) {
   }
 
   usuarioa: any = this.activerouter.snapshot.paramMap.get('id')
   nombrea: any = this.activerouter.snapshot.paramMap.get('nombre')
   apellidoa: any = this.activerouter.snapshot.paramMap.get('apellido')
 
-  primer_registro: any = localStorage.getItem('Peso')
+  primer_registro: any = localStorage.getItem('PesoA2')
   segundo_registro: any = localStorage.getItem('PesoA')
-  registro_actual: any = localStorage.getItem('PesoA2')
+  registro_actual: any = localStorage.getItem('Peso')
 
-  primer_IMC: any = localStorage.getItem('IMC')
+  primer_IMC: any = localStorage.getItem('IMCA2')
   segundo_IMC: any = localStorage.getItem('IMCA')
-  IMC_actual: any = localStorage.getItem('IMCA2')
+  IMC_actual: any = localStorage.getItem('IMC')
 
   cantidad_archivos:any
+
+  today: Date = new Date();
+  pipe = new DatePipe('en_US');
+  todayWithPipe = null;
 
   url_ = '/' + this.usuarioa + '/' + this.nombrea + '/' + this.apellidoa
   // this.primer_registro, this.segundo_registro, this.registro_actual
@@ -97,6 +105,8 @@ export class MinutaComponent {
     this.usuario.getusuario(this.usuarioa).subscribe((res: any) => {
       this.user = res
       console.log(this.user)
+      const imc:any=this.user.IMC
+      localStorage.setItem('IMC',imc)
       
     })
   }
@@ -121,6 +131,33 @@ export class MinutaComponent {
       console.log(this.images)
     }
   }
+
+  Recibe_imgMinuta(event: any) {
+    const file = event.target.files[0];
+    const imgRef = ref(this.storage, `minutas/${this.userid} ${this.nombre} ${this.apellido}/${this.usuarioa} ${this.nombrea} ${this.apellidoa}/${file.name}`)
+
+    uploadBytes(imgRef, file).then(async x => {
+      const url = await getDownloadURL(imgRef)
+      this.images = url
+      console.log(this.images)
+      return this.images
+    }).catch(error => console.log(error))
+  }
+  subirMinuta(){
+    const files ={
+      nombre: `${this.usuarioa} ${this.nombrea} ${this.apellidoa}`,
+      imagen:this.images,
+      fecha_creacion:this.pipe.transform(Date.now(), 'dd/MM/yyyy'),
+      idUser:this.usuarioa,
+      nutri_n:localStorage.getItem('Nombre'),
+      nutri_ape:localStorage.getItem('Apellido')
+    }
+    console.log(files)
+    this.usuario.subirArchivo(files).subscribe((res:any)=>{
+      console.log(res)
+    })
+  } 
+
 
   onSubmit(idUser: any) {
     const formData = new FormData();
@@ -157,7 +194,7 @@ export class MinutaComponent {
     ],
     datasets: [
       {
-        data: [this.primer_registro, this.segundo_registro, this.registro_actual],
+        data: [ this.primer_registro, this.segundo_registro,  this.registro_actual],
         label: 'Peso',
         fill: true,
         tension: 0.5,
@@ -198,3 +235,7 @@ export class MinutaComponent {
     localStorage.removeItem('IMCA2')
   }
 }
+function moment() {
+  throw new Error('Function not implemented.');
+}
+

@@ -3,6 +3,8 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { ListaUsersService } from 'src/app/services/lista-users.service';
+import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
+import { list } from 'firebase/storage';
 
 @Component({
   selector: 'app-subir-pdf',
@@ -29,14 +31,44 @@ export class SubirPDFComponent {
     nombre: this.nombre,
     apellido: this.apellido
   }
+  imagen=''
+  images2: string[] = [];
 
 
-  constructor(private archivo: ArchivosService, private http: HttpClient, private users:ListaUsersService) { }
+  constructor(private archivo: ArchivosService, private http: HttpClient, private users:ListaUsersService, private storage:Storage) { }
 
   ngOnInit() {
     this.mostrarImg();
     this.imagenActual();
+    console.log("el console.log de ngOnInit",this.images2[0])
   }
+  funcionreserva(event:any){
+    this.images2 = [];
+    const file = event.target.files[0];
+    const imgRef= ref(this.storage, `${this.id} ${this.nombre} ${this.apellido}/${file.name}`)
+
+    uploadBytes(imgRef, file).then(async x=>{
+      const url = await getDownloadURL(imgRef)
+      this.images2.push(url)
+      console.log(this.images2[0])
+      return this.images2[0]
+    }).catch(error=>console.log(error))
+  }
+
+  getImages(){
+    const imagesRef=ref(this.storage, `${this.id} ${this.nombre} ${this.apellido}`);
+
+    listAll(imagesRef).then(async (images)=>{
+      this.images2 = [];
+      for(let image of images.items){
+        const url= await getDownloadURL(image)
+        this.images2.push(url)
+        console.log(url)
+      }
+    }).catch(error=>console.log(error))
+  }
+
+
   selectImage(event: any) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];

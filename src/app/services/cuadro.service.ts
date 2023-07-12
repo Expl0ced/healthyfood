@@ -9,6 +9,7 @@ import { usuario } from '../models/usuario';
 export class CuadroService {
 
   url='https://api-rest-tesis.vercel.app/api/usuarios/'
+  url_prueba="api/usuarios/"
 
 
 
@@ -19,7 +20,7 @@ export class CuadroService {
   updateUser(usuario:usuario, id:number):Observable<usuario>{
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
-      return this.http.put<usuario>(this.url+id, usuario, {
+      return this.http.put<usuario>(this.url+`actualizar/${id}`, usuario, {
         headers:header
       })
     };

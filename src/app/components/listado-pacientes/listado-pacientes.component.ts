@@ -17,11 +17,13 @@ export class ListadoPacientesComponent implements OnInit {
     idOrden: 0,
     nombreNutri: localStorage.getItem('Nombre'),
     apellidoNutri: localStorage.getItem('Apellido'),
-    idClienteNutri: 0
+    idClienteNutri: 0,
+    idNutri:localStorage.getItem('idNutri')
   }
   nombre: any = localStorage.getItem('Nombre')
   apellido: any = localStorage.getItem('Apellido')
   rol: any = localStorage.getItem('Rol')
+  id: any= localStorage.getItem('idUser')
 
   constructor(private listado: ModificarUserService, private tostada: ToastrService) { }
 
@@ -29,7 +31,7 @@ export class ListadoPacientesComponent implements OnInit {
     this.UserLibres()
   }
   UserLibres() {
-    this.listado.getUserLibres().subscribe((resp: any) => {
+    this.listado.getUserLibres(this.id).subscribe((resp: any) => {
       this.usuarios = resp
       console.log(this.usuarios)
     })

@@ -1,3 +1,16 @@
 .btn-light{
     border: 1px solid black;
 }
+
+.spaces{
+    display: flex;
+    justify-content: center;
+}
+
+.margenes{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: -5px 4px 20px; 
+    /* box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); */
+    
+}

@@ -30,11 +30,11 @@
                     Cambiar Foto</button>
 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <form (ngSubmit)="onSubmit(userid)">
+                    <form (ngSubmit)="actualizarFotoPerfil()">
                         <div class="form-group">
                             <button type="button" class="btn btn-outline-primary">
                                 <input type="file" class="form-control-file" accept="image/*" name="image"
-                                    (change)="selectImage($event)"></button>
+                                    (change)="Recibe_imgPerfil($event)"></button>
                             <button type="submit" class="btn btn-outline-success">Upload</button>
                         </div>
                     </form>

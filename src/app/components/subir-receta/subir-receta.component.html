@@ -23,9 +23,7 @@
             </ul>
         </div>
         <div class="col-9 card-body">
-            <h5 class="titulo text-center">Cambio de Datos Personales
-            </h5>
-            <h5 class="titulo">Formulario de Registro
+            <h5 class="titulo text-center">Ingrese una Receta
             </h5>
             <form class="row g-3" (ngSubmit)="subirReceta()">
                 <div class="col-md-12">
@@ -100,7 +98,7 @@
                     <div>
                         <button type="button" class="btn btn-outline-primary">
                             <input type="file" class="form-control-file" accept="image/*" name="image"
-                                (change)="selectImageCabecera($event)">
+                                (change)="Recibe_imgCabecera($event)">
                         </button>
                     </div>
 
@@ -110,7 +108,7 @@
                     <div>
                         <button type="button" class="btn btn-outline-primary">
                             <input type="file" class="form-control-file" accept="image/*" name="etiqueta"
-                                (change)="selectImageEtiqueta($event)">
+                                (change)="Recibe_imgEtiqueta($event)">
                         </button>
                     </div>
 

@@ -20,19 +20,26 @@
                 <button type="button" class="btn btn-light m-1">
                     <li class="nav-item"><a class="nav-link" href="archivos_asignados">Archivos Asignados</a></li>
 
-                    
+
                 </button>
             </ul>
         </div>
         <div class="col">
             <div style="text-align: center">
                 <div class="container">
-                    <div class="row">
+                    <div class="row spaces">
+                        <h1>Minutas Asignadas a {{nombre}} {{apellido}}</h1>
                         <div class="col-md-6">
                             <div class="card-body">
                                 <div *ngFor="let element of files">
-                                    <!-- <a href="{{path2}}{{element.imagen}}" class="btn btn-primary mt-5" download>Descargar Archivo de fecha {{element.fecha_creacion}}</a> -->
-                                    <button (click)="downloadFile()" class="btn btn-primary mt-5">Descargar archivo</button>
+                                    <div class="card margenes">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Minuta asignada por {{element.nutri_n}} {{element.nutri_ape}}</h5>
+                                                Fecha Asignada: {{ element.fecha_creacion }} <br>
+                                                <a href="{{element.imagen}}" download='Minuta de {{nombre}} {{apellido}}' type="application/pdf" target="_blank" class="btn btn-primary mt-5">Descargar archivo</a>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -41,4 +48,3 @@
             </div>
         </div>
     </div>
-</div>

@@ -23,7 +23,11 @@ img{
     animation-timing-function: ease;
 }
 h1{
-    font-family: Montserrat, italic;
+    font-family: 'Montserrat', italic;
     margin-top: 5%;
     text-align: center;
+}
+h5{
+    font-size: 16px;
+    font-family:'Montserrat', italic;
 }

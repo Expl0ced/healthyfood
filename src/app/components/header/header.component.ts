@@ -23,16 +23,27 @@ export class HeaderComponent implements OnInit {
   imagenes: any = [];
   ngOnInit(): void {
     this.getParametros()
-    this.showImg()
   }
 
   getParametros() {
     const token: any = localStorage.getItem('token');
     const { idUser, Nombre, Apellido, Rol }: any = decode(token);
-    localStorage.setItem('Nombre', Nombre)
-    localStorage.setItem('Apellido', Apellido)
-    localStorage.setItem('idUser', idUser)
-    localStorage.setItem('Rol', Rol)
+    const { idNutri, NombreNutri, ApellidoNutri, RolNutri  }: any = decode(token);
+    if( Rol != 'undefined'){
+      localStorage.setItem('Nombre', Nombre)
+      localStorage.setItem('Apellido', Apellido)
+      localStorage.setItem('idUser', idUser)
+      localStorage.setItem('Rol', Rol)
+      localStorage.setItem('idNutri', idNutri)
+    }
+    if( RolNutri != 'undefined'){
+      localStorage.setItem('Nombre', NombreNutri)
+      localStorage.setItem('Apellido', ApellidoNutri)
+      localStorage.setItem('Rol', RolNutri)
+      localStorage.setItem('idNutri', idNutri)
+      localStorage.setItem('idUser', idUser)
+    }
+
     this.datos = localStorage.getItem('Nombre') + " " + localStorage.getItem('Apellido')
   }
   removeToken() {
@@ -41,19 +52,10 @@ export class HeaderComponent implements OnInit {
     const removerApellido: any = localStorage.removeItem('Apellido');
     const removerID: any = localStorage.removeItem('idUser');
     const removeRol: any = localStorage.removeItem('Rol')
+    const removerIDnutri: any = localStorage.removeItem('idNutri')
   }
   refresh() {
     window.location.reload()
-  }
-  showImg() {
-    this.archivo.getImg(this.id).subscribe((resp: any) => {
-      this.img = resp
-      const reader = new FileReader();
-      reader.onload = (this.img);
-      for(let imagen of this.img){
-        console.log(imagen)
-      }
-    })
   }
 
 }

@@ -42,12 +42,13 @@
                     <img src="{{ recetas.Imagen }}" class="imagen_receta" alt="" width="250">
                 </div>
                 <div class="row">
-                    <img src="{{recetas.Etiqueta}}" width="250">
+                    <img src="{{recetas.Etiqueta}}" width="150px" height="600px">
                 </div>
                 
             </div>
-            
+            <hr>
             <div class="row mt-3">
+                <h1 class="social fuente titulo">Comparte en Redes Sociales</h1>
                 <div class="col">
                     <button mat-fab shareButton="twitter" class="btn twitter social-media" #twtBtn="shareButton"
                     [style.backgroundColor]="twtBtn?.color || ''" style="color:white">

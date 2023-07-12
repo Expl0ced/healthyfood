@@ -26,6 +26,14 @@ export class ArchivosubidoComponent {
   url: any = 'http://localhost:4200/assets/minutas/'
   extension:any=''
 
+  download={
+    id:'',
+    nombre:'',
+    fecha:'',
+    imagen:'',
+    id_User:''
+  }
+
   constructor(private archivo: ArchivoasignService, private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -53,19 +61,22 @@ export class ArchivosubidoComponent {
     }
   }
   downloadFile() {
+    this.archivo.getArchivos(this.id).subscribe((res:any)=>{
+        this.download=res
+        console.log("AAAAAAAAAAAAAAA",this.download)
+    })
     for (let element = 0; element < this.data.length; element++) {
       const ruta = this.data[element];
-      console.log(ruta)
       this.filename = ruta.substring(ruta.lastIndexOf('/') + 1);
 
     }
-    const downloadinstance= document.createElement('a')
-    downloadinstance.href=this.url+this.filename
-    downloadinstance.target='_blank';
-    downloadinstance.download='Minuta de '+this.nombre+' '+this.apellido
+    // const downloadinstance= document.createElement('a')
+    // downloadinstance.href=this.url+this.filename
+    // downloadinstance.target='_blank';
+    // downloadinstance.download='Minuta de '+this.nombre+' '+this.apellido+'.pdf'
 
-    document.body.appendChild(downloadinstance)
-    downloadinstance.click();
-    document.body.removeChild(downloadinstance)
+    // document.body.appendChild(downloadinstance)
+    // downloadinstance.click();
+    // document.body.removeChild(downloadinstance)
   } 
 }

@@ -8,15 +8,18 @@ import { response } from '../models/response.interface';
   providedIn: 'root'
 })
 export class ListaUsersService {
-  _url = "https://api-rest-tesis.vercel.app/api/usuarios/"
+  _url = "https://api-rest-tesis.vercel.app/api/usuarios"
+  comodin = "https://api-rest-tesis.vercel.app/api/usuarios/usuarioExists/"
   url2 = 'https://api-rest-tesis.vercel.app/api/archivo/cuenta'
   urldelete: string = "";
+  url_prueba = 'https://api-rest-tesis.vercel.app/api/archivo/subir-Archivo/'
+  prueba = "/api/archivo/subir-Archivo/"
 
   constructor(private http: HttpClient) { }
 
 
 
-  obtenerUsers(): Observable<usuario[]> {
+  obtenerUsers(): Observable<any[]> {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
@@ -25,24 +28,24 @@ export class ListaUsersService {
     });
   };
 
-  createUser(user: usuario): Observable<usuario> {
+  createUser(user: any): Observable<any> {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
-    return this.http.post<usuario>(this._url, user, {
+    return this.http.post<any>(this._url, user, {
       headers: header
     });
   };
 
-  getusuario(id: number): Observable<usuario> {
+  getusuario(id: number): Observable<any> {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
-    return this.http.get<usuario>(this._url + '/' + id, {headers:header})
+    return this.http.get<any>(this._url + '/' + id, { headers: header })
   }
 
-  updateUser(usuario: usuario): Observable<usuario> {
+  updatePhotoUser(usuario: any, id: Number): Observable<any> {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
-    return this.http.put<usuario>(this._url, usuario, {
+    return this.http.put<any>(this._url + `/${id}`, usuario, {
       headers: header
     });
   };
@@ -60,14 +63,34 @@ export class ListaUsersService {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
-    return this.http.get(this.url2 + '/' + id,{headers:header})
+    return this.http.get(this.url2 + '/' + id, { headers: header })
   }
 
 
-  usuarioExists(Email:any, Password:any):Observable<any>{
+  usuarioExists(Email: any, Password: any): Observable<any> {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
-      return this.http.get(this._url+'/'+'usuarioExists/'+Email+'/'+Password,{headers:header})
+    return this.http.get(this._url + '/usuarioExists/' + Email + '/' + Password, { headers: header })
+  }
+
+
+  subirArchivo(archivo: any): Observable<any> {
+    let header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+
+    return this.http.post(this.url_prueba, archivo, {
+      headers: header
+    })
+  }
+  actualizarFotoPerfil(id: number, imagen: any): Observable<any> {
+    // let header = new HttpHeaders()
+    //   .set('Content-Type', 'text/html; charset=utf-8')
+    let header = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+      console.log('service', imagen)
+    return this.http.put<any>(this._url+ `/update-img/${id}`, imagen, {
+      headers: header
+    })
   }
 }

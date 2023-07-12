@@ -7,7 +7,7 @@ import { Item } from '../models/receta';
   providedIn: 'root'
 })
 export class RecetaService {
-  // _url="http://localhost:3000"
+  url_prueba:any="/api/recetas/"
   url_:any = "https://api-rest-tesis.vercel.app/api/recetas/"
   url2 = 'http://localhost:3300/';
   constructor(private http: HttpClient) {
@@ -60,6 +60,14 @@ export class RecetaService {
       .set('Content-Type', 'application/json')
     return this.http.get<any>(this.url_+"ultima/ingreso",{
       headers:header
+    })
+  }
+
+  postReceta_prueba(receta: any): Observable<any> {
+    let header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+    return this.http.post<any>(this.url_prueba, receta, {
+      headers: header
     })
   }
 }

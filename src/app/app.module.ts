@@ -11,6 +11,7 @@ import { ShareModule } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { RouterModule, Routes } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 //componentes   
 import { AppComponent } from './app.component';
@@ -41,6 +42,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { ComodinComponent } from './components/comodin/comodin.component';
 import { RecetasGuardadasComponent } from './components/recetas-guardadas/recetas-guardadas.component';
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -71,6 +74,8 @@ const shareProp = {
     FontAwesomeModule,
     AgGridModule,
     AgChartsAngularModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   declarations: [
     AppComponent,
@@ -93,6 +98,7 @@ const shareProp = {
     ComodinComponent,
     RecetasGuardadasComponent,
     HeroDetailComponent,
+
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

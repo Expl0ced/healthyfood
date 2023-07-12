@@ -79,3 +79,11 @@
 .lines-effect::after{
     right: 23.125rem;
 }
+hr{
+    margin-top: 2%;
+}
+
+.social{
+    margin-bottom: 2%;
+    
+}
