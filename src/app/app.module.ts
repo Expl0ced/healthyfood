@@ -44,6 +44,7 @@ import { RecetasGuardadasComponent } from './components/recetas-guardadas/receta
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
+import { EditarPacienteComponent } from './editar_paciente/editar-paciente/editar-paciente.component';
 
 
 
@@ -98,6 +99,7 @@ const shareProp = {
     ComodinComponent,
     RecetasGuardadasComponent,
     HeroDetailComponent,
+    EditarPacienteComponent,
 
   ],
   providers: [

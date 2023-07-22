@@ -17,6 +17,7 @@ export class PerfilComponent implements OnInit {
   nombre: any = localStorage.getItem('Nombre')
   apellido: any = localStorage.getItem('Apellido')
   rol: any = localStorage.getItem('Rol')
+  idnutri:any= localStorage.getItem('idNutri')
 
   user = {
     idUser: 0,
@@ -116,8 +117,14 @@ export class PerfilComponent implements OnInit {
 
   actualizarFotoPerfil(){
     this.users.actualizarFotoPerfil(this.userid, this.update).subscribe(res=>{
-      res=this.update
-      console.log('componente',res)
+      this.update=res
+    })
+    const new_object:any={
+      id:this.idnutri,
+      imagen:this.update.imagen
+    }
+    this.users.actualizarFotoNutri(this.idnutri, new_object).subscribe(res=>{
+      this.update=res
     })
   }
 

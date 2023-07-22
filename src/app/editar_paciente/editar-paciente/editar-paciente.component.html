@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <ul class="navbar-nav mt-5">
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="orden">Clientes Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
+                    <li class="nav-item"><a class="nav-link" href="listado_pacientes">Clientes no Asignados</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1" *ngIf="rol=='usuario' || rol=='admin'">
+                    <li class="nav-item"><a class="nav-link" href="perfil">Perfil</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="cuadro">Cambiar Datos</a></li>
+                </button>
+                <button *ngIf="rol=='nutricionista' || rol=='admin'" type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="upreceta">Subir Receta</a></li>
+                </button>
+                <button type="button" class="btn btn-light m-1">
+                    <li class="nav-item"><a class="nav-link" href="archivos_asignados">Archivos Asignados</a></li>
+                </button>
+            </ul>
+        </div>
+        <div class="col-9 card-body">
+            <h5 class="titulo text-center">Cambio de Datos Personales
+            </h5>
+            <form class="row g-3" (ngSubmit)="ObtenerUsuario()">
+                <div class="col-md-6 text-center">
+                    <label for="validationServerUsername" class="form-label">Nombre</label>
+                    <div class="input-group input group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </span>
+                        <input type="text" class="form-control" id="validationServerUsername" [(ngModel)]="user.Nombre"
+                            [ngModelOptions]="{ standalone: true }" value="{{user.Nombre}}" minlength="3" required>
+                        <div id="validationServerUsernameFeedback" class="valid-feedback">
+                            ¡Se ve bien!
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label for="validationCustom02" class="form-label">Apellido</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </span>
+                        <input type="text" class="form-control" minlength="3" id="apellido" [(ngModel)]="user.Apellido"
+                            [ngModelOptions]="{ standalone: true }" value="{{user.Apellido}}" required>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <label for="validationCustomUsername" class="form-label">Email</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-at"></i></span>
+                        <input type="text" class="form-control" id="email" aria-describedby="inputGroupPrepend"
+                            value="{{user.Email}}" [(ngModel)]="user.Email" [ngModelOptions]="{ standalone: true }"
+                            required>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <label for="validationCustomUsername" class="form-label">URL Imagen</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-image"></i></span>
+                        <input type="text" class="form-control" id="text" aria-describedby="inputGroupPrepend"
+                            placeholder="Ingrese URL de la imagen que quiera agregar" [(ngModel)]="user.Img"
+                            [ngModelOptions]="{ standalone: true }" required>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label for="validationCustomUsername" class="form-label">Peso en kilos</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i
+                                class="fa-solid fa-dumbbell"></i></span>
+                        <input type="text" class="form-control" id="peso" aria-describedby="inputGroupPrepend"
+                            value="{{user.Peso}}" [(ngModel)]="user.Peso" [ngModelOptions]="{ standalone: true }"
+                            required>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <label for="validationCustomUsername" class="form-label">Altura en centimetros</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-up-down"></i></span>
+                        <input type="text" class="form-control" id="altura" aria-describedby="inputGroupPrepend"
+                            value="{{user.Altura}}" [(ngModel)]="user.Altura" [ngModelOptions]="{ standalone: true }"
+                            required>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <label for="validationCustomUsername" class="form-label">Contraseña</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-at"></i></span>
+                        <input type="password" class="form-control" id="password" aria-describedby="inputGroupPrepend"
+                            value="{{user.Password}}" [(ngModel)]="user.Password" [ngModelOptions]="{ standalone: true }"
+                            required>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <label for="validationCustom05" class="form-label">Sintomas</label>
+                    <div class="input-group input-group">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            placeholder="Escriba de forma resumida sus dolencias, cardiopatias, sintomas y/o enfermedades"
+                            value="{{user.Sintomas}}" [(ngModel)]="user.Sintomas"
+                            [ngModelOptions]="{ standalone: true }"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-success" (click)="ModificarUsuario()" type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

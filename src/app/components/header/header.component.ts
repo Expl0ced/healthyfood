@@ -29,14 +29,14 @@ export class HeaderComponent implements OnInit {
     const token: any = localStorage.getItem('token');
     const { idUser, Nombre, Apellido, Rol }: any = decode(token);
     const { idNutri, NombreNutri, ApellidoNutri, RolNutri  }: any = decode(token);
-    if( Rol != 'undefined'){
+    if( Rol == 'usuario'){
       localStorage.setItem('Nombre', Nombre)
       localStorage.setItem('Apellido', Apellido)
       localStorage.setItem('idUser', idUser)
       localStorage.setItem('Rol', Rol)
       localStorage.setItem('idNutri', idNutri)
     }
-    if( RolNutri != 'undefined'){
+    if( RolNutri == 'nutricionista'){
       localStorage.setItem('Nombre', NombreNutri)
       localStorage.setItem('Apellido', ApellidoNutri)
       localStorage.setItem('Rol', RolNutri)

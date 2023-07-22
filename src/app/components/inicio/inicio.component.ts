@@ -20,14 +20,13 @@ export class InicioComponent {
   }
 
   reloadPage() {
-
-    if(this.rol=='nutricionista'){
-      this.router.navigate(['orden'])
+    if (this.rol == 'nutricionista') {
+      window.location.reload();
+      window.location.href = '/orden';
+    } else {
+      window.location.reload();
+      window.location.href = '/recetas';
     }
-    else{
-      this.router.navigate(['recetas'])
-    }
-
   }
 
 }

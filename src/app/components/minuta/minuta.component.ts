@@ -105,7 +105,6 @@ export class MinutaComponent {
     this.usuario.getusuario(this.usuarioa).subscribe((res: any) => {
       this.user = res
       console.log(this.user)
-      
     })
   }
   getFileCount(){

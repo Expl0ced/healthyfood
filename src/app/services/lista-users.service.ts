@@ -7,13 +7,16 @@ import { response } from '../models/response.interface';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ListaUsersService {
+  
   _url = "https://api-rest-tesis.vercel.app/api/usuarios"
   comodin = "https://api-rest-tesis.vercel.app/api/usuarios/usuarioExists/"
   url2 = 'https://api-rest-tesis.vercel.app/api/archivo/cuenta'
   urldelete: string = "";
   url_prueba = 'https://api-rest-tesis.vercel.app/api/archivo/subir-Archivo/'
   prueba = "/api/archivo/subir-Archivo/"
+  imagen_prueba="/api/usuarios"
 
   constructor(private http: HttpClient) { }
 
@@ -89,7 +92,17 @@ export class ListaUsersService {
     let header = new HttpHeaders()
     .set('Content-Type', 'application/json')
       console.log('service', imagen)
-    return this.http.put<any>(this._url+ `/update-img/${id}`, imagen, {
+    return this.http.put<any>(this.imagen_prueba+ `/update-img/${id}`,imagen, {
+      headers: header
+    })
+  }
+  actualizarFotoNutri(idnutri:number, imagen: any): Observable<any> {
+    // let header = new HttpHeaders()
+    //   .set('Content-Type', 'text/html; charset=utf-8')
+    let header = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+      console.log('service 2', imagen)
+    return this.http.put<any>(this.imagen_prueba+ `/update-imgNutri/${idnutri}`,imagen, {
       headers: header
     })
   }
