@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
 import { ListaUsersService } from 'src/app/services/lista-users.service';
 import Swal from 'sweetalert2';
-import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
+import { Chart, ChartConfiguration, ChartOptions, ChartType } from "chart.js";
 import { Subscription } from 'rxjs';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
 import { DatePipe } from '@angular/common';
@@ -39,13 +39,9 @@ export class MinutaComponent {
     Img: "",
     Asignado: "",
     Peso: 0,
-    Peso_Anterior: 0,
-    Peso_Anterior2: 0,
     Altura: 0,
     IMC: 0,
-    IMC_Anterior:0,
-    IMC_Anterior2:0,
-    Contex_Fisica:'',
+    Contex_Fisica: '',
     Genero: ''
   }
   navigationSubscription?: Subscription;
@@ -62,34 +58,38 @@ export class MinutaComponent {
   timeline: boolean = true;
 
   // view: [number, number, number] = [this.user.Peso, this.user.Peso_Anterior, this.user.Peso_Anterior2];
-  multi?: any[] = [this.user.Peso, this.user.Peso_Anterior, this.user.Peso_Anterior2];
   view: any[] = [700, 300];
 
   colorScheme = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
+  chartInstance: any;
+  chartCanvas: any;
+  cdRef: any;
 
-  constructor(private http: HttpClient, private activerouter: ActivatedRoute, private usuario: ListaUsersService, 
-    private router: Router, public changeDetector: ChangeDetectorRef,  private storage: Storage) {
+  imcScore:any=[]
+
+  constructor(private http: HttpClient, private activerouter: ActivatedRoute, private usuario: ListaUsersService,
+    private router: Router, public changeDetector: ChangeDetectorRef, private storage: Storage) {
   }
 
   usuarioa: any = this.activerouter.snapshot.paramMap.get('id')
   nombrea: any = this.activerouter.snapshot.paramMap.get('nombre')
   apellidoa: any = this.activerouter.snapshot.paramMap.get('apellido')
 
-  primer_registro: any = localStorage.getItem('PesoA2')
-  segundo_registro: any = localStorage.getItem('PesoA')
-  registro_actual: any = localStorage.getItem('Peso')
 
-  primer_IMC: any = localStorage.getItem('IMCA2')
-  segundo_IMC: any = localStorage.getItem('IMCA')
-  IMC_actual: any = localStorage.getItem('IMC')
-
-  cantidad_archivos:any
+  cantidad_archivos: any
 
   today: Date = new Date();
   pipe = new DatePipe('en_US');
   todayWithPipe = null;
+
+  peso_hist: any = localStorage.getItem('datosPesoHistorico')
+  peso_array=this.peso_hist.split(',')
+
+  recordPeso: any = []
+  imc_hist: any = localStorage.getItem('datosIMCHistorico')
+  IMC_array=this.imc_hist.split(',')
 
   url_ = '/' + this.usuarioa + '/' + this.nombrea + '/' + this.apellidoa
   // this.primer_registro, this.segundo_registro, this.registro_actual
@@ -98,6 +98,12 @@ export class MinutaComponent {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.obtenerUser()
     this.getFileCount()
+    console.log(this.IMC_array, 'IMC')
+    console.log(this.peso_array,'pesos')
+  
+
+    this.obtenerIMC_historico()
+    // this.obtenerPeso_historico()
   }
 
 
@@ -107,9 +113,9 @@ export class MinutaComponent {
       console.log(this.user)
     })
   }
-  getFileCount(){
-    this.usuario.countFile(this.usuarioa).subscribe((res:any)=>{
-      this.cantidad_archivos=res[0]
+  getFileCount() {
+    this.usuario.countFile(this.usuarioa).subscribe((res: any) => {
+      this.cantidad_archivos = res[0]
       console.log(this.cantidad_archivos)
     })
   }
@@ -140,22 +146,22 @@ export class MinutaComponent {
       return this.images
     }).catch(error => console.log(error))
   }
-  subirMinuta(){
-    const files ={
+  subirMinuta() {
+    const files = {
       nombre: `${this.usuarioa} ${this.nombrea} ${this.apellidoa}`,
-      imagen:this.images,
-      fecha_creacion:this.pipe.transform(Date.now(), 'dd/MM/yyyy'),
-      idUser:this.usuarioa,
-      nutri_n:localStorage.getItem('Nombre'),
-      nutri_ape:localStorage.getItem('Apellido')
+      imagen: this.images,
+      fecha_creacion: this.pipe.transform(Date.now(), 'dd/MM/yyyy'),
+      idUser: this.usuarioa,
+      nutri_n: localStorage.getItem('Nombre'),
+      nutri_ape: localStorage.getItem('Apellido')
     }
     console.log(files)
-    this.usuario.subirArchivo(files).subscribe((res:any)=>{
+    this.usuario.subirArchivo(files).subscribe((res: any) => {
       console.log(res)
     })
-  } 
-
-
+  }
+  obtenerIMC_historico() {
+  }
   onSubmit(idUser: any) {
     const formData = new FormData();
     formData.append('file', this.images);
@@ -186,12 +192,12 @@ export class MinutaComponent {
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [
       '',
-      '',
+      '','','','','','','','','','',
       'Registro Actual'
     ],
     datasets: [
       {
-        data: [ this.primer_registro, this.segundo_registro,  this.registro_actual],
+        data: [this.peso_array[0],this.peso_array[1],this.peso_array[2],this.peso_array[3],this.peso_array[4],this.peso_array[5],this.peso_array[6],this.peso_array[7],this.peso_array[8],this.peso_array[9],this.peso_array[10],this.peso_array[11], this.peso_array[12]],
         label: 'Peso',
         fill: true,
         tension: 0.5,
@@ -200,15 +206,22 @@ export class MinutaComponent {
       }
     ]
   };
+
+  // obtenerPeso_historico() {
+  //   this.usuario.getPeso_hist(this.usuarioa).subscribe((res: any) => {
+  //     this.peso_hist = res;
+  //     console.log(this.peso_hist, 'peso');
+  //   });
+  // }
   public lineChartDataIMC: ChartConfiguration<'line'>['data'] = {
     labels: [
       '',
-      '',
-      'IMC Actual'
+      '','','','','','','','','','',
+      'Registro Actual'
     ],
     datasets: [
       {
-        data: [this.primer_IMC, this.segundo_IMC, this.IMC_actual],
+        data: [this.IMC_array[0],this.IMC_array[1],this.IMC_array[2],this.IMC_array[3],this.IMC_array[4],this.IMC_array[5],this.IMC_array[6],this.IMC_array[7],this.IMC_array[8],this.IMC_array[9],this.IMC_array[10],this.IMC_array[11]],
         label: 'IMC',
         fill: true,
         tension: 0.5,
@@ -231,7 +244,15 @@ export class MinutaComponent {
     localStorage.removeItem('IMCA')
     localStorage.removeItem('IMCA2')
   }
+  borrar_Paciente() {
+    this.usuario.deleteAsignado(this.usuarioa).subscribe((res: any) => {
+      this.usuarioa =
+        console.log(res)
+    })
+  }
 }
+
+
 function moment() {
   throw new Error('Function not implemented.');
 }

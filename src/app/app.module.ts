@@ -44,7 +44,8 @@ import { RecetasGuardadasComponent } from './components/recetas-guardadas/receta
 import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
-import { EditarPacienteComponent } from './editar_paciente/editar-paciente/editar-paciente.component';
+import { EditarPacienteComponent } from './components/editar-paciente/editar-paciente.component';
+import { RegistroNutriaComponent } from './components/registro-nutria/registro-nutria.component';
 
 
 
@@ -100,6 +101,7 @@ const shareProp = {
     RecetasGuardadasComponent,
     HeroDetailComponent,
     EditarPacienteComponent,
+    RegistroNutriaComponent,
 
   ],
   providers: [

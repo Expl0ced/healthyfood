@@ -27,6 +27,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
+                            <h1>Datos del Paciente</h1>
                             <div class="row" style="justify-content: center;">
                                 <img src="{{user.Img}}" alt="" class="img-dimension img-thumbnail rounded float-start">
                             </div>
@@ -46,7 +47,7 @@
                                 <div class="col">
                                     <div style="display: block;">
                                     <h4>Los pesos registrados por el Paciente</h4>
-                                    <canvas baseChart width="200" height="200"
+                                    <canvas baseChart width="400" height="300"
                                         [type]="'line'"
                                         [data]="lineChartData"
                                         [options]="lineChartOptions"
@@ -57,7 +58,7 @@
                                 <div class="col">
                                     <div style="display: block;">
                                     <h4>Variaciones del IMC del paciente</h4>
-                                    <canvas baseChart width="200" height="200"
+                                    <canvas baseChart width="400" height="300"
                                         [type]="'line'"
                                         [data]="lineChartDataIMC"
                                         [options]="lineChartOptions"
@@ -79,7 +80,8 @@
                                     </form>
                                 </div>
                             </div>
-                            <div><a type="button" class="btn btn-danger" style="margin-top: 0.5em;" href="editar_paciente/{{usuarioa}}">Cambiar datos de paciente</a></div>
+                            <div><a type="button" class="btn btn-danger" style="margin-top: 0.5em;" href="editar_paciente/{{usuarioa}}">Cambiar datos de paciente</a>
+                                <a type="button" class="btn btn-info" style="margin-top: 0.5em; margin-left: 0.5em;" (click)="borrar_Paciente()">Eliminar Asignacion</a></div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 card-body">
+            <h5 class="titulo">Formulario de Registro de Nutricionistas
+                <div *ngIf="loading" class="spinner-border float-end" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </h5>
+            <form class="row g-3" (ngSubmit)="usuarioExiste()">
+                <div class="col-md-6">
+                    <label for="validationServerUsername" class="form-label text">Nombre</label>
+                    <div class="input-group input group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </span>
+                        <input type="text" [(ngModel)]="user.Nombre" [ngModelOptions]="{ standalone: true }"
+                            class="form-control" id="validationServerUsername" minlength="3" required>
+                        <div id="validationServerUsernameFeedback" class="valid-feedback">
+                            ¡Se ve bien!
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="valid-feedback">
+                        Nombre Valido
+                    </div> -->
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustom02" class="form-label">Apellido</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </span>
+                        <input type="text" [(ngModel)]="user.Apellido" [ngModelOptions]="{ standalone: true }"
+                            class="form-control" minlength="3" id="apellido" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustomUsername" class="form-label">Email</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="fa-solid fa-at"></i></span>
+                        <input type="text" [(ngModel)]="user.Email" [ngModelOptions]="{ standalone: true }"
+                            class="form-control" id="email" aria-describedby="inputGroupPrepend" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustomUsername" class="form-label">Peso en Kilos</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i
+                                class="fa-solid fa-weight-hanging"></i></span>
+                        <input type="text" [(ngModel)]="user.Peso" [ngModelOptions]="{ standalone: true }"
+                            class="form-control" id="peso" aria-describedby="inputGroupPrepend" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustomUsername" class="form-label">Altura en Centimetros</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text" id="inputGroupPrepend"><i
+                                class="fa-solid fa-ruler-vertical"></i></span>
+                        <input type="text" [(ngModel)]="user.Altura" [ngModelOptions]="{ standalone: true }"
+                            class="form-control" id="altura" aria-describedby="inputGroupPrepend" required>
+                    </div>
+                </div>  
+                <div class="col-md-6">
+                    <label for="validationCustom05" class="form-label">Contraseña</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input type="password" [(ngModel)]="user.Password" [ngModelOptions]="{ standalone: true }"
+                            class="form-control" minlength="10" id="password" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustom04" class="form-label">Genero</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                        </span>
+                        <select class="form-select" [(ngModel)]="user.Genero" [ngModelOptions]="{ standalone: true }"
+                            id="genero" required>
+                            <option selected disabled value="">Genero</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="no_binario">No Binario</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustom04" class="form-label">Contextura Fisica</label>
+                    <div class="input-group input-group">
+                        <span class="input-group-text">
+                            <i class="fa-solid fa-users-viewfinder"></i>
+                        </span>
+                        <select class="form-select" [(ngModel)]="user.Contex_Fisica"
+                            [ngModelOptions]="{ standalone: true }" id="contex_fisica" required>
+                            <option selected disabled value="">Contextura Fisica</option>
+                            <option value="Ectomorfo">Ectomorfo: cuerpo delgado, extemidades largas y
+                                dificultad para ganar masa muscular</option>
+                            <option value="Mesomorfo">Mesomorfo: facilidad de ganar masa muscular, rapida
+                                recuperacion fisica, tiende a ganar sobrepeso sin actividad fisica</option>
+                            <option value="Endomorfo">Endomorfo: comun entre personas de origen europeo,
+                                metabolismo lento, </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                    <div class="col-md-4"><button class="btn btn-success button-send" type="submit">Enviar</button></div>
+                    <div class="col-md-4"></div>
+                    </div>
+                    
+                    
+                </div>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+</div>

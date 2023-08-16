@@ -1,0 +1,30 @@
+.green-icon {
+    color: green;
+}
+
+.red-icon {
+    color: red;
+}
+
+h5 {
+    text-align: center;
+}
+
+.spinner-border {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.titulo {
+    margin-bottom: 5.rem;
+}
+
+.button-send {
+    font-size: 16px;
+    padding: 14px 40px;
+    border-radius: 12px;
+}
+
+.button-send:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}

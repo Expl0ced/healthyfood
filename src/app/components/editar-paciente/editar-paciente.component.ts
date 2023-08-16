@@ -23,12 +23,8 @@ export class EditarPacienteComponent {
     Img: "",
     Asignado: "",
     Peso: 0,
-    Peso_Anterior: 0,
-    Peso_Anterior2: 0,
     Altura: 0,
     IMC: 0,
-    IMC_Anterior:0,
-    IMC_Anterior2:0,
     Contex_Fisica:'',
     Genero: ''
   }

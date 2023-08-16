@@ -15,8 +15,10 @@ export class ListaUsersService {
   url2 = 'https://api-rest-tesis.vercel.app/api/archivo/cuenta'
   urldelete: string = "";
   url_prueba = 'https://api-rest-tesis.vercel.app/api/archivo/subir-Archivo/'
-  prueba = "/api/archivo/subir-Archivo/"
-  imagen_prueba="/api/usuarios"
+  prueba = "https://api-rest-tesis.vercel.app/api/archivo/subir-Archivo/"
+  imagen_prueba="https://api-rest-tesis.vercel.app/api/usuarios"
+  url_peso="https://api-rest-tesis.vercel.app/api/usuarios/peso_historico/"
+  url_imc="https://api-rest-tesis.vercel.app/api/usuarios/imc_historico/"
 
   constructor(private http: HttpClient) { }
 
@@ -57,7 +59,7 @@ export class ListaUsersService {
     let header = new HttpHeaders()
       .set('Content-Type', 'application/json')
 
-    return this.http.delete<response>(this._url + id, {
+    return this.http.delete<response>(this._url + `/${id}`, {
       headers: header
     });
   };
@@ -92,7 +94,7 @@ export class ListaUsersService {
     let header = new HttpHeaders()
     .set('Content-Type', 'application/json')
       console.log('service', imagen)
-    return this.http.put<any>(this.imagen_prueba+ `/update-img/${id}`,imagen, {
+    return this.http.put<any>(this._url+ `/update-img/${id}`,imagen, {
       headers: header
     })
   }
@@ -102,8 +104,35 @@ export class ListaUsersService {
     let header = new HttpHeaders()
     .set('Content-Type', 'application/json')
       console.log('service 2', imagen)
-    return this.http.put<any>(this.imagen_prueba+ `/update-imgNutri/${idnutri}`,imagen, {
+    return this.http.put<any>(this._url+ `/update-imgNutri/${idnutri}`,imagen, {
       headers: header
     })
+  }
+
+  deleteAsignado(id: number): Observable<any> {
+    let header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+
+    return this.http.delete<response>(this._url+`/asignacion/${id}`, {
+      headers: header
+    });
+  };
+
+  createNutria(user: any): Observable<any> {
+    let header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+    return this.http.post<any>(this._url+'/registro_nutria/', user, {
+      headers: header
+    });
+  };
+  getPeso_hist(id: number): Observable<any> {
+    let header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+    return this.http.get<any>(this.url_peso + `${id}`, { headers: header })
+  }
+  getIMC_hist(id: number): Observable<any> {
+    let header = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+    return this.http.get<any>(this.url_imc + `${id}`, { headers: header })
   }
 }
