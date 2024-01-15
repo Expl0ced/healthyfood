@@ -28,20 +28,18 @@ export class HeaderComponent implements OnInit {
   getParametros() {
     const token: any = localStorage.getItem('token');
     const { idUser, Nombre, Apellido, Rol }: any = decode(token);
-    const { idNutri, NombreNutri, ApellidoNutri, RolNutri  }: any = decode(token);
-    if( Rol == 'usuario'){
+    const { idNutria, NombreNutria, ApellidoNutria, RolNutria  }: any = decode(token);
+    if( Rol == 'usuario' || Rol=='admin'){
       localStorage.setItem('Nombre', Nombre)
       localStorage.setItem('Apellido', Apellido)
       localStorage.setItem('idUser', idUser)
       localStorage.setItem('Rol', Rol)
-      localStorage.setItem('idNutri', idNutri)
     }
-    if( RolNutri == 'nutricionista'){
-      localStorage.setItem('Nombre', NombreNutri)
-      localStorage.setItem('Apellido', ApellidoNutri)
-      localStorage.setItem('Rol', RolNutri)
-      localStorage.setItem('idNutri', idNutri)
-      localStorage.setItem('idUser', idUser)
+    if( RolNutria == 'nutricionista'){
+      localStorage.setItem('Nombre', NombreNutria)
+      localStorage.setItem('Apellido', ApellidoNutria)
+      localStorage.setItem('Rol', RolNutria)
+      localStorage.setItem('idNutri', idNutria)
     }
 
     this.datos = localStorage.getItem('Nombre') + " " + localStorage.getItem('Apellido')

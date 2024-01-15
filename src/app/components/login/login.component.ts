@@ -128,6 +128,7 @@ export class LoginComponent implements OnInit {
 
   logIn() {
     this.emailExtension = this.user.email.substr(-4);
+    console.log(this.user.email, this.user.pass)
     this.performLogin();
   }
 

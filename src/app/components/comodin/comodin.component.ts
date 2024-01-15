@@ -71,7 +71,7 @@ export class ComodinComponent {
       if (datosPesoHistoricoStr !== null) {
         const datosPesoHistorico = JSON.parse(datosPesoHistoricoStr);
         const datosPesoHistoricoCadena = JSON.stringify(datosPesoHistorico).split(",");
-        const datosPesoLimpio = datosPesoHistoricoCadena.map((cadena:any) => cadena.replace("{\"peso\":", "").replace('[','').replace('}','').replace(']',''));
+        const datosPesoLimpio = datosPesoHistoricoCadena.map((cadena:any) => cadena.replace('{', "").replace('"Peso":', "").replace('[','').replace('}','').replace(']',''));
         const datosencadena=datosPesoLimpio.toString()
         localStorage.setItem('datosPesoHistorico',datosencadena)
 

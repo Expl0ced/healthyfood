@@ -1,9 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mt-5">
                 <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
-                    <li class="nav-item"><a class="nav-link" (click)="cleanPeso()" href="orden">Clientes Asignados</a></li>
+                    <li class="nav-item"><a class="nav-link" href="orden">Clientes Asignados</a>
+                    </li>
                 </button>
                 <button type="button" class="btn btn-light m-1" *ngIf="rol=='nutricionista'">
                     <li class="nav-item"><a class="nav-link" href="listado_pacientes">Clientes no Asignados</a></li>
@@ -44,29 +45,30 @@
                                 <hr>
                             </div>
                             <div class="row">
+                                <a type="button" class="btn btn-info" style="margin-top: 0.5em; margin-left: 0.5em;"
+                                href="comodin/{{usuarioa}}/{{nombrea}}/{{apellidoa}}">Actualizar graficos</a>
                                 <div class="col">
                                     <div style="display: block;">
-                                    <h4>Los pesos registrados por el Paciente</h4>
-                                    <canvas baseChart width="400" height="300"
-                                        [type]="'line'"
-                                        [data]="lineChartData"
-                                        [options]="lineChartOptions"
-                                        [legend]="lineChartLegend">
-                                    </canvas>
+                                        <h4>Los pesos registrados por el Paciente</h4>
+                                        <canvas baseChart width="400" height="300" [type]="'line'"
+                                            [data]="lineChartData" [options]="lineChartOptions"
+                                            [legend]="lineChartLegend">
+                                        </canvas>
+                                    </div>
+                                        
                                 </div>
-                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col">
                                     <div style="display: block;">
-                                    <h4>Variaciones del IMC del paciente</h4>
-                                    <canvas baseChart width="400" height="300"
-                                        [type]="'line'"
-                                        [data]="lineChartDataIMC"
-                                        [options]="lineChartOptions"
-                                        [legend]="lineChartLegend">
-                                    </canvas>
+                                        <h4>Variaciones del IMC del paciente</h4>
+                                        <canvas baseChart width="400" height="300" [type]="'line'"
+                                            [data]="lineChartDataIMC" [options]="lineChartOptionsIMC"
+                                            [legend]="lineChartLegend">
+                                        </canvas>
+                                    </div>
                                 </div>
-                                </div>
-                                
+
                             </div>
                             <div class="card">
                                 <div class="card-body">
@@ -75,13 +77,16 @@
                                             <button type="button" class="btn btn-outline-primary">
                                                 <input type="file" class="form-control-file" accept="{{formato}}"
                                                     name="pdf" (change)="Recibe_imgMinuta($event)"></button>
-                                            <button type="submit" class="btn btn-outline-success">Upload</button>
+                                            <button type="submit" class="btn btn-outline-success">Subir</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div><a type="button" class="btn btn-danger" style="margin-top: 0.5em;" href="editar_paciente/{{usuarioa}}">Cambiar datos de paciente</a>
-                                <a type="button" class="btn btn-info" style="margin-top: 0.5em; margin-left: 0.5em;" (click)="borrar_Paciente()">Eliminar Asignacion</a></div>
+                            <div><a type="button" class="btn btn-danger" style="margin-top: 0.5em;"
+                                    href="editar_paciente/{{usuarioa}}">Cambiar datos de paciente</a>
+                                <a type="button" class="btn btn-info" style="margin-top: 0.5em; margin-left: 0.5em;"
+                                    (click)="borrar_Paciente()">Eliminar Asignacion</a>
+                            </div>
                         </div>
                     </div>
                 </div>

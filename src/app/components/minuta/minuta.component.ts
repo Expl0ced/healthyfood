@@ -67,7 +67,7 @@ export class MinutaComponent {
   chartCanvas: any;
   cdRef: any;
 
-  imcScore:any=[]
+  imcScore: any = []
 
   constructor(private http: HttpClient, private activerouter: ActivatedRoute, private usuario: ListaUsersService,
     private router: Router, public changeDetector: ChangeDetectorRef, private storage: Storage) {
@@ -85,11 +85,16 @@ export class MinutaComponent {
   todayWithPipe = null;
 
   peso_hist: any = localStorage.getItem('datosPesoHistorico')
-  peso_array=this.peso_hist.split(',')
+  peso_array = this.peso_hist.split(',')
 
   recordPeso: any = []
   imc_hist: any = localStorage.getItem('datosIMCHistorico')
-  IMC_array=this.imc_hist.split(',')
+  IMC_array = this.imc_hist.split(',')
+
+  minpeso=Math.min(...this.peso_array)
+  maxpeso=Math.max(...this.peso_array)
+  minimc=Math.min(...this.IMC_array)
+  maximc=Math.max(...this.IMC_array)
 
   url_ = '/' + this.usuarioa + '/' + this.nombrea + '/' + this.apellidoa
   // this.primer_registro, this.segundo_registro, this.registro_actual
@@ -99,11 +104,10 @@ export class MinutaComponent {
     this.obtenerUser()
     this.getFileCount()
     console.log(this.IMC_array, 'IMC')
-    console.log(this.peso_array,'pesos')
-  
+    console.log(this.peso_array, 'pesos')
 
     this.obtenerIMC_historico()
-    // this.obtenerPeso_historico()
+    this.obtenerPeso_historico()
   }
 
 
@@ -160,8 +164,6 @@ export class MinutaComponent {
       console.log(res)
     })
   }
-  obtenerIMC_historico() {
-  }
   onSubmit(idUser: any) {
     const formData = new FormData();
     formData.append('file', this.images);
@@ -192,13 +194,13 @@ export class MinutaComponent {
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [
       '',
-      '','','','','','','','','','',
+      '', '', '', '', '', '', '', '', '', '',
       'Registro Actual'
     ],
     datasets: [
       {
-        data: [this.peso_array[0],this.peso_array[1],this.peso_array[2],this.peso_array[3],this.peso_array[4],this.peso_array[5],this.peso_array[6],this.peso_array[7],this.peso_array[8],this.peso_array[9],this.peso_array[10],this.peso_array[11], this.peso_array[12]],
-        label: 'Peso',
+        data: [this.peso_array[0], this.peso_array[1], this.peso_array[2], this.peso_array[3], this.peso_array[4], this.peso_array[5], this.peso_array[6], this.peso_array[7], this.peso_array[8], this.peso_array[9], this.peso_array[10], this.peso_array[11], this.peso_array[12]],
+        label: 'Cambios en el Peso',
         fill: true,
         tension: 0.5,
         borderColor: 'black',
@@ -216,12 +218,12 @@ export class MinutaComponent {
   public lineChartDataIMC: ChartConfiguration<'line'>['data'] = {
     labels: [
       '',
-      '','','','','','','','','','',
+      '', '', '', '', '', '', '', '', '', '',
       'Registro Actual'
     ],
     datasets: [
       {
-        data: [this.IMC_array[0],this.IMC_array[1],this.IMC_array[2],this.IMC_array[3],this.IMC_array[4],this.IMC_array[5],this.IMC_array[6],this.IMC_array[7],this.IMC_array[8],this.IMC_array[9],this.IMC_array[10],this.IMC_array[11]],
+        data: [this.IMC_array[0], this.IMC_array[1], this.IMC_array[2], this.IMC_array[3], this.IMC_array[4], this.IMC_array[5], this.IMC_array[6], this.IMC_array[7], this.IMC_array[8], this.IMC_array[9], this.IMC_array[10], this.IMC_array[11]],
         label: 'IMC',
         fill: true,
         tension: 0.5,
@@ -231,24 +233,104 @@ export class MinutaComponent {
     ]
   };
   public lineChartOptions: ChartOptions<'line'> = {
-    responsive: false
+    responsive: true,
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
+    scales: {
+      y: { // defining min and max so hiding the dataset does not change scale range
+        min: this.minpeso-1,
+        max: this.maxpeso+1
+      }
+    }
+
+  };
+  public lineChartOptionsIMC: ChartOptions<'line'> = {
+    responsive: true,
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: 'linear',
+        from: 1,
+        to: 0,
+        loop: true
+      }
+    },
+    scales: {
+      y: { // defining min and max so hiding the dataset does not change scale range
+        min: this.minimc-0.5,
+        max: this.maximc+1
+      }
+    }
+
   };
   public lineChartLegend = true;
 
-  cleanPeso() {
-    localStorage.removeItem('Peso')
-    localStorage.removeItem('PesoA')
-    localStorage.removeItem('PesoA2')
-
-    localStorage.removeItem('IMC')
-    localStorage.removeItem('IMCA')
-    localStorage.removeItem('IMCA2')
-  }
   borrar_Paciente() {
     this.usuario.deleteAsignado(this.usuarioa).subscribe((res: any) => {
       this.usuarioa =
         console.log(res)
     })
+    setTimeout(() => {
+      localStorage.removeItem('datosPesoHistorico');
+      localStorage.removeItem('datosIMCHistorico');
+      this.router.navigate(['orden'])
+  }, 1000);
+  }
+
+
+  obtenerPeso_historico() {
+    this.usuario.getPeso_hist(this.usuarioa).subscribe((res: any) => {
+      this.peso_hist = res;
+      localStorage.setItem('datosPesoHistorico', JSON.stringify(this.peso_hist));
+
+      const datosPesoHistoricoStr = localStorage.getItem('datosPesoHistorico');
+      if (datosPesoHistoricoStr !== null) {
+        const datosPesoHistorico = JSON.parse(datosPesoHistoricoStr);
+        const datosPesoHistoricoCadena = JSON.stringify(datosPesoHistorico).split(",");
+        const datosPesoLimpio = datosPesoHistoricoCadena.map((cadena:any) => cadena.replace('{', "").replace('"Peso":', "").replace('[','').replace('}','').replace(']',''));
+        const datosencadena=datosPesoLimpio.toString()
+        localStorage.setItem('datosPesoHistorico',datosencadena)
+
+
+
+
+
+        // Obtener solo los valores del Peso como un array
+        const valoresPeso: any = datosPesoHistorico
+        // Filtrar los valores de peso nulos (si es necesario)
+        const valoresPesoFiltrados: number[] = valoresPeso.filter((peso: number | null) => peso !== null);
+
+        console.log(valoresPesoFiltrados);
+      } else {
+        console.log('No se encontraron datos históricos de peso en el localStorage');
+      }
+    });
+  }
+  obtenerIMC_historico() {
+    this.usuario.getIMC_hist(this.usuarioa).subscribe((res: any) => {
+      this.imc_hist = res
+      localStorage.setItem('datosIMCHistorico', JSON.stringify(this.imc_hist));
+
+
+      const datosIMCHistoricoStr = localStorage.getItem('datosIMCHistorico');
+      if (datosIMCHistoricoStr !== null) {
+        const datosIMCHistorico = JSON.parse(datosIMCHistoricoStr);
+
+        // Obtener solo los valores del IMC como un array
+        const valoresIMC: any = datosIMCHistorico.map((item: any) => item.IMC);
+        localStorage.setItem('datosIMCHistorico', valoresIMC)
+        console.log(valoresIMC);
+      } else {
+        console.log('No se encontraron datos históricos del IMC en el localStorage');
+      }
+    });
   }
 }
 
